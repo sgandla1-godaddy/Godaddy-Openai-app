@@ -5,11 +5,14 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import albumsData from "./albums.json";
 import { useMaxHeight } from "../use-max-height";
 import { useOpenAiGlobal } from "../use-openai-global";
+import { useWidgetProps } from "../use-widget-props";
 import FullscreenViewer from "./FullscreenViewer";
 import AlbumCard from "./AlbumCard";
 
 function AlbumsCarousel({ onSelect }) {
-  const albums = albumsData?.albums || [];
+  // Get data from MCP server via window.openai.toolOutput
+  const toolOutput = useWidgetProps({ albums: albumsData?.albums || [] });
+  const albums = toolOutput?.albums || albumsData?.albums || [];
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "center",
     loop: false,

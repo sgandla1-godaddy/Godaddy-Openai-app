@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import Inspector from "./Inspector";
 import Sidebar from "./Sidebar";
 import { useOpenAiGlobal } from "../use-openai-global";
+import { useWidgetProps } from "../use-widget-props";
 import { useMaxHeight } from "../use-max-height";
 import { Maximize2 } from "lucide-react";
 import {
@@ -38,7 +39,11 @@ export default function App() {
   const mapRef = useRef(null);
   const mapObj = useRef(null);
   const markerObjs = useRef([]);
-  const places = markers?.places || [];
+  
+  // Get data from MCP server via window.openai.toolOutput
+  const toolOutput = useWidgetProps({ places: markers?.places || [] });
+  const places = toolOutput?.places || markers?.places || [];
+  console.log("toolOutput places", toolOutput, places);
   const markerCoords = places.map((p) => p.coords);
   const navigate = useNavigate();
   const location = useLocation();

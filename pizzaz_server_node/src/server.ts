@@ -9,6 +9,7 @@ import { URL, fileURLToPath } from "node:url";
 
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
   CallToolRequestSchema,
   ListResourceTemplatesRequestSchema,
@@ -146,6 +147,53 @@ const toolInputSchema = {
 const toolInputParser = z.object({
   pizzaTopping: z.string(),
 });
+async function loadCustomPizzaPlaces() { 
+  return {
+    "places": [
+      {
+        "id": "nova-slice-lab-sravanis-place",
+        "name": "Nova Slice Lab Sravani's Place",
+        "coords": [-122.4098, 37.8001],
+        "description": "Award‑winning Neapolitan pies in North Beach Sravani's Place.",
+        "city": "North Beach  ",
+        "rating": 4.8,
+        "price": "$$$",
+        "thumbnail": "https://persistent.oaistatic.com/pizzaz/pizzaz-1.png"
+      },
+      {
+        "id": "midnight-marinara-sravanis-place",
+        "name": "Midnight Marinara Sravani's Place",
+        "coords": [-122.4093, 37.7990],
+        "description": "Focaccia‑style squares, late‑night favorite.",
+        "city": "North Beach Sravani's Place",
+        "rating": 4.6,
+        "price": "$",
+        "thumbnail": "https://persistent.oaistatic.com/pizzaz/pizzaz-2.png"
+      },
+      {
+        "id": "cinder-oven-co-sravanis-place",
+        "name": "Cinder Oven Co. Sravani's Place",
+        "coords": [-122.4255, 37.7613],
+        "description": "Thin‑crust classics on 18th Street.",
+        "city": "Mission Sravani's Place",
+        "rating": 4.5,
+        "price": "$$",
+        "thumbnail": "https://persistent.oaistatic.com/pizzaz/pizzaz-3.png"
+      },
+      {
+        "id": "neon-crust-works",
+        "name": "Neon Crust Works Sravani's Place",
+        "coords": [-122.4388, 37.7775],
+        "description": "Deep‑dish and cornmeal crust favorites.",
+        "city": "Alamo Square Sravani's Place",
+        "rating": 4.5,
+        "price": "$$",
+        "thumbnail": "https://persistent.oaistatic.com/pizzaz/pizzaz-6.png"
+      }
+    ]
+  }
+
+}
 
 const tools: Tool[] = widgets.map((widget) => ({
   name: widget.id,
@@ -160,6 +208,8 @@ const tools: Tool[] = widgets.map((widget) => ({
     readOnlyHint: true,
   },
 }));
+
+
 
 const resources: Resource[] = widgets.map((widget) => ({
   uri: widget.templateUri,
@@ -244,6 +294,9 @@ function createPizzazServer(): Server {
       }
 
       const args = toolInputParser.parse(request.params.arguments ?? {});
+      
+      // Load custom pizza places data
+      const customPlaces = await loadCustomPizzaPlaces();
 
       return {
         content: [
@@ -254,6 +307,7 @@ function createPizzazServer(): Server {
         ],
         structuredContent: {
           pizzaTopping: args.pizzaTopping,
+          ...customPlaces, // Spread the places array into structuredContent
         },
         _meta: widgetMeta(widget),
       };
@@ -376,10 +430,21 @@ httpServer.on("clientError", (err: Error, socket) => {
   socket.end("HTTP/1.1 400 Bad Request\r\n\r\n");
 });
 
-httpServer.listen(port, () => {
-  console.log(`Pizzaz MCP server listening on http://localhost:${port}`);
-  console.log(`  SSE stream: GET http://localhost:${port}${ssePath}`);
-  console.log(
-    `  Message post endpoint: POST http://localhost:${port}${postPath}?sessionId=...`
-  );
-});
+// Check if running in stdio mode (e.g., via MCP inspector)
+if (process.argv.includes('--stdio') || process.stdin.isTTY === false) {
+  const server = createPizzazServer();
+  const transport = new StdioServerTransport();
+  server.connect(transport).catch((error) => {
+    console.error("Failed to start stdio server", error);
+    process.exit(1);
+  });
+} else {
+  // Run HTTP server
+  httpServer.listen(port, () => {
+    console.log(`Pizzaz MCP server listening on http://localhost:${port}`);
+    console.log(`  SSE stream: GET http://localhost:${port}${ssePath}`);
+    console.log(
+      `  Message post endpoint: POST http://localhost:${port}${postPath}?sessionId=...`
+    );
+  });
+}
