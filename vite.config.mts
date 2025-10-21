@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 function buildInputs() {
   const files = fg.sync("src/**/index.{tsx,jsx}", { dot: false });
+
   return Object.fromEntries(
     files.map((f) => [path.basename(path.dirname(f)), path.resolve(f)])
   );
@@ -201,7 +202,8 @@ if (!window.__vite_plugin_react_preamble_installed__) {
 
 const inputs = buildInputs();
 
-export default defineConfig(({}) => ({
+console.log("inputs::::", inputs);
+export default defineConfig(({ }) => ({
   plugins: [
     tailwindcss(),
     react(),
@@ -212,6 +214,13 @@ export default defineConfig(({}) => ({
     port: 4444,
     strictPort: true,
     cors: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   esbuild: {
     jsx: "automatic",

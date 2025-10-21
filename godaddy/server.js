@@ -34,9 +34,22 @@ app.get('/api/hello', (req, res) => {
   });
 });
 
+app.get('/api/findDomain', (req, res) => {
+  res.json({
+    status: 'OK',
+    message: 'Domain found!',
+    data: {
+      domain: 'example.com',
+      price: 100,
+      availability: 'available'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Catch all handler: send back React's index.html file for any non-API routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'src/godaddy/build', 'index.html'));
 });
 
 // Error handling middleware

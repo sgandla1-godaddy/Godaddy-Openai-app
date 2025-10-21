@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-interface ServerResponse {
-  status?: string;
-  message?: string;
-  timestamp?: string;
-  data?: {
-    server: string;
-    version: string;
-    environment: string;
-  };
-}
-
 function App() {
-  const [serverData, setServerData] = useState<ServerResponse | null>(null);
+  const [serverData, setServerData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   const fetchServerData = async () => {
     setLoading(true);
@@ -51,6 +40,23 @@ function App() {
     }
   };
 
+  const findDomain = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('/api/findDomain');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setServerData(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to find domain');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchServerData();
   }, []);
@@ -77,6 +83,13 @@ function App() {
           >
             {loading ? 'Checking...' : 'Check Health'}
           </button>
+          <button
+            onClick={findDomain}
+            disabled={loading}
+            className="btn btn-secondary"
+          >
+            {loading ? 'Finding...' : 'Find Domain'}
+          </button>
         </div>
 
         {error && (
@@ -98,6 +111,7 @@ function App() {
           <ul>
             <li><code>GET /api/health</code> - Server health check</li>
             <li><code>GET /api/hello</code> - Server information</li>
+            <li><code>GET /api/findDomain</code> - Find a domain</li>
           </ul>
         </div>
       </header>
