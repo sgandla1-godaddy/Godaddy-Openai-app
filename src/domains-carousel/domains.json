@@ -1,0 +1,141 @@
+{
+  "domains": [
+    {
+      "id": "1",
+      "name": "pettreatsco.com",
+      "price": "$11.99",
+      "originalPrice": "$21.99",
+      "period": "for first year",
+      "description": "Perfect for pet treat businesses and animal care services",
+      "badge": "AVAILABLE",
+      "tld": ".com",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 3,
+        "memorable": 4,
+        "popular": 3
+      }
+    },
+    {
+      "id": "2",
+      "name": "furrybakery.com",
+      "price": "$11.99",
+      "originalPrice": "$21.99",
+      "period": "for first year",
+      "description": "Ideal for pet bakeries and specialty pet food shops",
+      "badge": "AVAILABLE",
+      "tld": ".com",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 4,
+        "memorable": 5,
+        "popular": 3
+      }
+    },
+    {
+      "id": "3",
+      "name": "petbakeshop.com",
+      "price": "$11.99",
+      "originalPrice": "$21.99",
+      "period": "for first year",
+      "description": "Great for pet treat and accessory businesses",
+      "badge": "AVAILABLE",
+      "tld": ".com",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 3,
+        "memorable": 4,
+        "popular": 4
+      }
+    },
+    {
+      "id": "4",
+      "name": "pettreatsco.net",
+      "price": "$14.99",
+      "originalPrice": "$24.99",
+      "period": "for first year",
+      "description": "Alternative extension for pet treat businesses",
+      "badge": "AVAILABLE",
+      "tld": ".net",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%23059669' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.net%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 3,
+        "memorable": 4,
+        "popular": 2
+      }
+    },
+    {
+      "id": "5",
+      "name": "pettreats.io",
+      "price": "$39.99",
+      "originalPrice": "$49.99",
+      "period": "for first year",
+      "description": "Modern tech-focused domain for pet industry",
+      "badge": "AVAILABLE",
+      "tld": ".io",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%237c3aed' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.io%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 4,
+        "memorable": 5,
+        "popular": 4
+      }
+    },
+    {
+      "id": "6",
+      "name": "pawsomebakery.com",
+      "price": "$11.99",
+      "originalPrice": "$21.99",
+      "period": "for first year",
+      "description": "Fun and memorable name for pet bakeries",
+      "badge": "AVAILABLE",
+      "tld": ".com",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 5,
+        "memorable": 5,
+        "popular": 3
+      }
+    },
+    {
+      "id": "7",
+      "name": "treatsforfriends.com",
+      "price": "$11.99",
+      "originalPrice": "$21.99",
+      "period": "for first year",
+      "description": "Friendly domain name for pet treat companies",
+      "badge": "AVAILABLE",
+      "tld": ".com",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 5,
+        "memorable": 4,
+        "popular": 3
+      }
+    },
+    {
+      "id": "8",
+      "name": "pettreatclub.com",
+      "price": "$11.99",
+      "originalPrice": "$21.99",
+      "period": "for first year",
+      "description": "Perfect for subscription-based pet treat services",
+      "badge": "AVAILABLE",
+      "tld": ".com",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 4,
+        "memorable": 4,
+        "popular": 4
+      }
+    }
+  ]
+}
+
