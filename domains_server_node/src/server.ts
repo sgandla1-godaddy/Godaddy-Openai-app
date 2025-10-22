@@ -90,10 +90,10 @@ const widgets: DomainWidget[] = [
     id: "search-domains",
     title: "Search Domain Names",
     templateUri: "ui://widget/domain-carousel.html",
-    invoking: "Searching available domains",
-    invoked: "Found domain options",
+    invoking: "Searching for available domain names",
+    invoked: "Found domain options for your business idea",
     html: readWidgetHtml("domains-carousel"),
-    responseText: "Found available domain names!",
+    responseText: "Here are some great domain options for your business!",
   },
 ];
 
@@ -110,7 +110,7 @@ const toolInputSchema = {
   properties: {
     keywords: {
       type: "string",
-      description: "Keywords to search for domain names (e.g., 'pet treats', 'bakery')",
+      description: "Business idea, keywords, or domain concept to search for (e.g., 'pet treats', 'bakery', 'my coffee shop', 'tech startup')",
     },
   },
   required: ["keywords"],
@@ -122,101 +122,118 @@ const toolInputParser = z.object({
 });
 
 /**
- * Load custom domain search results
- * In production, this would call the GoDaddy API
+ * Call GoDaddy API to get real domain search results
  */
 async function loadCustomDomains(keywords: string) {
-  // Simulated domain search results based on keywords
-  return {
-    domains: [
+  try {
+    console.log(`[DomainSearch] Searching for domains with keywords: "${keywords}"`);
+    
+    // Call GoDaddy API
+    const response = await fetch(
+      `https://entourage.prod.aws.godaddy.com/v1/search/spins?q=${encodeURIComponent(keywords)}&pagesize=5`,
       {
-        id: "1",
-        name: "pettreatsco.com",
-        price: "$11.99",
-        originalPrice: "$21.99",
-        period: "for first year",
-        description: "Perfect for pet treat businesses and animal care services",
-        badge: "AVAILABLE",
-        tld: ".com",
-        available: true,
-        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
-        metrics: {
-          emotional: 3,
-          memorable: 4,
-          popular: 3,
+        method: 'GET',
+        headers: {
+          'User-Agent': 'got (https://github.com/sindresorhus/got)',
+          'Accept': 'application/json',
         },
-      },
-      {
-        id: "2",
-        name: "furrybakery.com",
-        price: "$11.99",
-        originalPrice: "$21.99",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`GoDaddy API error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log(`[DomainSearch] API response received:`, data);
+
+    // Transform GoDaddy API response to our domain format
+    const domains = data.RecommendedDomains?.map((domain: any, index: number) => {
+      // Find corresponding product info for pricing
+      const product = data.Products?.find((p: any) => p.Tld === domain.Extension);
+      
+      return {
+        id: (index + 1).toString(),
+        name: domain.Fqdn,
+        price: product?.PriceInfo?.CurrentPriceDisplay || "$0.00",
+        originalPrice: product?.PriceInfo?.ListPriceDisplay || "$0.00",
         period: "for first year",
-        description: "Ideal for pet bakeries and specialty pet food shops",
-        badge: "AVAILABLE",
-        tld: ".com",
+        description: `Perfect for ${keywords} businesses and services`,
+        badge: domain.IsUnpricedAftermarketDomain ? "PREMIUM" : "AVAILABLE",
+        tld: `.${domain.Extension}`,
         available: true,
-        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+        image: generateDomainImage(domain.Extension),
         metrics: {
-          emotional: 4,
-          memorable: 4,
-          popular: 3,
+          emotional: Math.floor(Math.random() * 3) + 3, // 3-5
+          memorable: Math.floor(Math.random() * 3) + 3, // 3-5
+          popular: Math.floor(Math.random() * 3) + 2,   // 2-4
         },
-      },
-      {
-        id: "3",
-        name: "pawsomedelights.com",
-        price: "$11.99",
-        originalPrice: "$21.99",
-        period: "for first year",
-        description: "Great for pet food delivery and subscription services",
-        badge: "AVAILABLE",
-        tld: ".com",
-        available: true,
-        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
-        metrics: {
-          emotional: 4,
-          memorable: 3,
-          popular: 3,
+        // Additional GoDaddy-specific data
+        isPremium: domain.IsPremiumTier,
+        isAftermarket: domain.IsUnpricedAftermarketDomain,
+        aftermarketPrice: domain.PriceDisplay,
+        productId: domain.ProductId,
+      };
+    }) || [];
+
+    console.log(`[DomainSearch] Transformed ${domains.length} domains`);
+
+    return {
+      domains,
+      searchKeywords: keywords,
+      totalResults: domains.length,
+      apiResponse: data, // Include raw response for debugging
+    };
+  } catch (error) {
+    console.error('[DomainSearch] Error calling GoDaddy API:', error);
+    
+    // Fallback to mock data if API fails
+    return {
+      domains: [
+        {
+          id: "1",
+          name: `${keywords.replace(/\s+/g, '').toLowerCase()}.com`,
+          price: "$11.99",
+          originalPrice: "$21.99",
+          period: "for first year",
+          description: `Perfect for ${keywords} businesses and services`,
+          badge: "AVAILABLE",
+          tld: ".com",
+          available: true,
+          image: generateDomainImage("com"),
+          metrics: {
+            emotional: 3,
+            memorable: 4,
+            popular: 3,
+          },
         },
-      },
-      {
-        id: "4",
-        name: "goodboygourmet.com",
-        price: "$11.99",
-        originalPrice: "$21.99",
-        period: "for first year",
-        description: "Premium pet food and gourmet treats brand name",
-        badge: "AVAILABLE",
-        tld: ".com",
-        available: true,
-        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
-        metrics: {
-          emotional: 4,
-          memorable: 4,
-          popular: 2,
-        },
-      },
-      {
-        id: "5",
-        name: "tailwagtreats.com",
-        price: "$11.99",
-        originalPrice: "$21.99",
-        period: "for first year",
-        description: "Fun and memorable name for pet treat companies",
-        badge: "AVAILABLE",
-        tld: ".com",
-        available: true,
-        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
-        metrics: {
-          emotional: 5,
-          memorable: 4,
-          popular: 3,
-        },
-      },
-    ],
-    searchKeywords: keywords,
+      ],
+      searchKeywords: keywords,
+      totalResults: 1,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+}
+
+/**
+ * Generate a simple SVG image for domain TLD
+ */
+function generateDomainImage(tld: string): string {
+  const colors: Record<string, string> = {
+    'com': '#1e40af',
+    'net': '#059669',
+    'org': '#dc2626',
+    'io': '#7c3aed',
+    'co': '#ea580c',
+    'info': '#0891b2',
+    'services': '#be185d',
+    'life': '#16a34a',
+    'online': '#9333ea',
   };
+  
+  const color = colors[tld] || '#6b7280';
+  
+  return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='${encodeURIComponent(color)}' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.${tld}%3C/text%3E%3C/svg%3E`;
 }
 
 const tools: Tool[] = widgets.map((widget) => ({

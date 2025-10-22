@@ -29,6 +29,8 @@ function App() {
   // Get data from MCP server via window.openai.toolOutput
   const toolOutput = useWidgetProps({ domains: domainsData?.domains || [] });
   const domains = toolOutput?.domains || domainsData?.domains || [];
+  const searchKeywords = toolOutput?.searchKeywords;
+  const totalResults = toolOutput?.totalResults;
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
@@ -54,6 +56,9 @@ function App() {
     
     // Telemetry
     console.log('[DomainCarousel] Initialized with', domains.length, 'domains');
+    if (searchKeywords) {
+      console.log('[DomainCarousel] Search keywords:', searchKeywords);
+    }
     
     return () => {
       emblaApi.off("select", updateButtons);
@@ -89,6 +94,19 @@ function App() {
       role="region"
       aria-label="Available domain names carousel"
     >
+      {/* Search Context Header */}
+      {searchKeywords && (
+        <div className="mb-4 px-5">
+          <h2 className="text-lg font-semibold text-gray-900">
+            Domain options for "{searchKeywords}"
+          </h2>
+          {totalResults && (
+            <p className="text-sm text-gray-600 mt-1">
+              Found {totalResults} available domain{totalResults !== 1 ? 's' : ''}
+            </p>
+          )}
+        </div>
+      )}
       {/* Carousel Container */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div 
