@@ -7,6 +7,7 @@ import DomainCard from "../components/cards/DomainCard";
 import CardSkeleton from "../components/cards/CardSkeleton";
 import ActionLink from "../components/ActionLink";
 import { useWidgetProps } from "../use-widget-props";
+import { useTheme } from "../use-theme";
 
 function App() {
   // Feature flag to use mock data for local development
@@ -17,6 +18,10 @@ function App() {
   const searchKeywords = toolOutput?.searchKeywords;
   const totalResults = toolOutput?.totalResults;
   const [isLoading, setIsLoading] = React.useState(true);
+  
+  // Get current theme from ChatGPT
+  const theme = useTheme();
+  const isDark = theme === "dark";
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
@@ -83,18 +88,26 @@ function App() {
 
   return (
     <div 
-      className="antialiased relative w-full text-gray-900 py-5 bg-white"
+      className={`antialiased relative w-full py-5 ${
+        isDark 
+          ? 'bg-transparent text-white' 
+          : 'bg-transparent text-gray-900'
+      }`}
       role="region"
       aria-label="Available domain names carousel"
     >
       {/* Search Context Header */}
       {!isLoading && searchKeywords && (
-        <div className="mb-4 px-5">
-          <h2 className="text-lg font-semibold text-gray-900">
+        <div className="mb-4">
+          <h2 className={`text-lg font-semibold ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>
             Domain options for "{searchKeywords}"
           </h2>
           {totalResults && (
-            <p className="text-sm text-gray-600 mt-1">
+            <p className={`text-sm mt-1 ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>
               Found {totalResults} available domain{totalResults !== 1 ? 's' : ''}
             </p>
           )}
@@ -102,7 +115,7 @@ function App() {
       )}
       {/* Carousel Container */}
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex gap-4 max-sm:mx-5 items-stretch" role="list">
+        <div className="flex gap-4 items-stretch" role="list">
           {isLoading ? (
             // Show skeleton loaders while loading
             Array.from({ length: 4 }).map((_, index) => (
@@ -125,12 +138,16 @@ function App() {
       <div
         aria-hidden="true"
         className={
-          "pointer-events-none absolute inset-y-0 left-0 w-3 z-[5] transition-opacity duration-200 " +
+          "pointer-events-none absolute inset-y-0 left-0 w-8 z-[5] transition-opacity duration-200 " +
           (canPrev ? "opacity-100" : "opacity-0")
         }
       >
         <div
-          className="h-full w-full border-l border-black/15 bg-gradient-to-r from-black/10 to-transparent"
+          className={`h-full w-full ${
+            isDark 
+              ? 'bg-gradient-to-r from-[#212121] to-transparent'
+              : 'bg-gradient-to-r from-white to-transparent'
+          }`}
           style={{
             WebkitMaskImage:
               "linear-gradient(to bottom, transparent 0%, white 30%, white 70%, transparent 100%)",
@@ -142,12 +159,16 @@ function App() {
       <div
         aria-hidden="true"
         className={
-          "pointer-events-none absolute inset-y-0 right-0 w-3 z-[5] transition-opacity duration-200 " +
+          "pointer-events-none absolute inset-y-0 right-0 w-8 z-[5] transition-opacity duration-200 " +
           (canNext ? "opacity-100" : "opacity-0")
         }
       >
         <div
-          className="h-full w-full border-r border-black/15 bg-gradient-to-l from-black/10 to-transparent"
+          className={`h-full w-full ${
+            isDark
+              ? 'bg-gradient-to-l from-[#212121] to-transparent'
+              : 'bg-gradient-to-l from-white to-transparent'
+          }`}
           style={{
             WebkitMaskImage:
               "linear-gradient(to bottom, transparent 0%, white 30%, white 70%, transparent 100%)",
@@ -161,7 +182,11 @@ function App() {
       {!isLoading && canPrev && (
         <button
           aria-label="View previous domains"
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full bg-white text-gray-500 shadow-sm ring-1 ring-black/5 hover:text-gray-900 active:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 cursor-pointer"
+          className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full ring-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer ${
+            isDark
+              ? 'bg-[#252935] text-white ring-white/10 hover:bg-[#2d3142] active:bg-[#2d3142] focus:ring-blue-500 shadow-lg'
+              : 'bg-white text-gray-500 ring-black/5 hover:text-gray-900 active:bg-gray-50 focus:ring-gray-600'
+          }`}
           onClick={handlePrevious}
           type="button"
         >
@@ -175,7 +200,11 @@ function App() {
       {!isLoading && canNext && (
         <button
           aria-label="View next domains"
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full bg-white text-gray-500 shadow-sm ring-1 ring-black/5 hover:text-gray-900 active:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 cursor-pointer"
+          className={`absolute right-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full ring-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer ${
+            isDark
+              ? 'bg-[#252935] text-white ring-white/10 hover:bg-[#2d3142] active:bg-[#2d3142] focus:ring-blue-500 shadow-lg'
+              : 'bg-white text-gray-500 ring-black/5 hover:text-gray-900 active:bg-gray-50 focus:ring-gray-600'
+          }`}
           onClick={handleNext}
           type="button"
         >

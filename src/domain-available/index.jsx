@@ -5,9 +5,12 @@ import FeaturedDomain from "../components/cards/FeaturedDomain";
 import BundleCard from "../components/cards/BundleCard";
 import CardSkeleton from "../components/cards/CardSkeleton";
 import ActionLink from "../components/ActionLink";
+import { useTheme } from "../use-theme";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
+  const theme = useTheme();
+  const isDark = theme === "dark";
   const allDomains = domainsData?.domains || [];
   const featuredDomain = allDomains.find(d => d.isRequested) || allDomains[0];
   const moreDomains = allDomains.filter(d => !d.isRequested && d.available);
@@ -29,7 +32,14 @@ function App() {
   }, [moreDomains.length]);
 
   return (
-    <div className="antialiased w-full text-gray-900 py-8 bg-white" role="main">
+    <div 
+      className={`antialiased w-full py-8 ${
+        isDark 
+          ? 'bg-transparent text-white' 
+          : 'bg-transparent text-gray-900'
+      }`} 
+      role="main"
+    >
       <div className="flex flex-wrap justify-center gap-6 px-6">
         <div className="w-full max-w-[340px]">
           {isLoading ? (

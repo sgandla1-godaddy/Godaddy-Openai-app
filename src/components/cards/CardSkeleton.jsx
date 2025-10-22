@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "../../use-theme";
 
 /**
  * Unified loading skeleton for card components
@@ -6,13 +7,17 @@ import React from "react";
  * @param {boolean} showImage - Whether to show an image skeleton (for domain cards)
  */
 export default function CardSkeleton({ variant = 'domain', showImage = false }) {
-  const baseClasses = "animate-pulse bg-gray-200 rounded";
+  const theme = useTheme();
+  const isDark = theme === "dark";
+  const baseClasses = `animate-pulse rounded ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`;
   
   // Domain Card Skeleton (for carousel)
   if (variant === 'domain') {
     return (
       <div
-        className="min-w-[280px] max-w-[280px] w-[75vw] sm:w-[280px] self-stretch flex flex-col border border-gray-200 rounded-sm px-4 py-5"
+        className={`min-w-[280px] max-w-[280px] w-[75vw] sm:w-[280px] self-stretch flex flex-col border rounded-lg px-4 py-5 ${
+          isDark ? 'bg-[#1a1d29]/60 border-white/10' : 'bg-white border-gray-200'
+        }`}
         role="status"
         aria-label="Loading domain card"
       >

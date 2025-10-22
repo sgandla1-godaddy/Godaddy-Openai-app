@@ -1,8 +1,12 @@
 import React from "react";
 import { ShoppingCart, Info, ExternalLink } from "lucide-react";
+import { useTheme } from "../../use-theme";
 
 export default function DomainCard({ domain, showImage = false, showAvailableBadge = true, highlightTLD = true }) {
   if (!domain) return null;
+  
+  const theme = useTheme();
+  const isDark = theme === "dark";
 
   const getDomainParts = (domainName) => {
     const lastDotIndex = domainName.lastIndexOf('.');
@@ -27,7 +31,11 @@ export default function DomainCard({ domain, showImage = false, showAvailableBad
 
   return (
     <div
-      className="min-w-[280px] select-none max-w-[280px] w-[75vw] sm:w-[280px] self-stretch flex flex-col border border-gray-200 rounded-sm px-4 py-5"
+      className={`min-w-[280px] select-none max-w-[280px] w-[75vw] sm:w-[280px] self-stretch flex flex-col border rounded-lg px-4 py-5 ${
+        isDark 
+          ? 'bg-[#1a1d29]/60 border-white/10' 
+          : 'bg-white border-gray-200'
+      }`}
       role="article"
       aria-label={`Domain ${domain.name}`}
     >
@@ -59,11 +67,13 @@ export default function DomainCard({ domain, showImage = false, showAvailableBad
       )}
 
       <div className={`${showImage ? 'mt-3' : ''} flex flex-col flex-1`}>
-        <h3 className="text-xl font-semibold text-gray-900 truncate mb-3">
+        <h3 className={`text-xl font-semibold truncate mb-3 ${
+          isDark ? 'text-white' : 'text-gray-900'
+        }`}>
           {highlightTLD ? (
             <>
               <span>{base}</span>
-              <span className="text-[#00a4a6]">{tld}</span>
+              <span className={isDark ? 'text-[#4a9eff]' : 'text-[#00a4a6]'}>{tld}</span>
             </>
           ) : (
             domain.name
@@ -75,23 +85,33 @@ export default function DomainCard({ domain, showImage = false, showAvailableBad
             <div className="flex items-baseline gap-2">
             {domain.originalPrice && (
               <span
-                className="text-xs text-gray-500 line-through"
+                className={`text-xs line-through ${
+                  isDark ? 'text-gray-400' : 'text-gray-500'
+                }`}
                 aria-label={`Original price ${domain.originalPrice}`}
               >
                 {domain.originalPrice}
               </span>
             )}
-            <span className="text-md font-semibold text-gray-900">
+            <span className={`text-md font-semibold ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>
               {domain.price}
             </span>
           </div>
 
           <div className="flex items-center gap-1 mt-0.5">
-            <span className="text-[10px] text-gray-700 font-medium">{domain.period}</span>
+            <span className={`text-[10px] font-medium ${
+              isDark ? 'text-gray-300' : 'text-gray-700'
+            }`}>{domain.period}</span>
             <button
               type="button"
               aria-label="Pricing information"
-              className="text-gray-500 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-300 rounded cursor-pointer"
+              className={`focus:outline-none focus:ring-2 focus:ring-offset-1 rounded cursor-pointer ${
+                isDark 
+                  ? 'text-gray-400 hover:text-gray-300 focus:ring-blue-500' 
+                  : 'text-gray-500 hover:text-gray-600 focus:ring-gray-300'
+              }`}
             >
               <Info className="h-3 w-3" aria-hidden="true" />
             </button>
@@ -103,7 +123,11 @@ export default function DomainCard({ domain, showImage = false, showAvailableBad
           <button
             type="button"
             onClick={handleSelect}
-            className="group relative flex-1 bg-black text-white dark:border dark:border-gray-600 dark:text-white hover:bg-gray-800 dark:hover:bg-gray-800 active:bg-gray-900 dark:active:bg-gray-700 transition-all duration-200 hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 dark:focus:ring-gray-600 text-sm font-medium px-4 py-2.5 rounded-sm min-h-[44px] cursor-pointer overflow-hidden flex items-center justify-center gap-2"
+            className={`group relative flex-1 transition-all duration-200 hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-offset-2 text-sm font-medium px-4 py-2.5 rounded-sm min-h-[44px] cursor-pointer overflow-hidden flex items-center justify-center gap-2 ${
+              isDark
+                ? 'bg-[#0071c2] text-white hover:bg-[#006bb3] active:bg-[#005999] focus:ring-[#0071c2]'
+                : 'bg-black text-white hover:bg-gray-800 active:bg-gray-900 focus:ring-gray-900'
+            }`}
             aria-label={`Select ${domain.name}`}
           >
             View on GoDaddy.com
