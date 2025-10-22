@@ -216,17 +216,6 @@ function App() {
         </button>
       )}
 
-      {/* Show more results button */}
-      {!isLoading && (
-        <div className="mt-4 flex justify-center">
-          <ActionLink
-            onClick={handleShowMore}
-            ariaLabel="Show more domain results"
-          >
-            Show more results
-          </ActionLink>
-        </div>
-      )}
     </div>
   );
 }

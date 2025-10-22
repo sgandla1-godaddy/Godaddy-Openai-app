@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "id": "website-builder",
+      "icon": "globe",
+      "name": "Website Builder",
+      "description": "Build a professional website in minutes with easy drag-and-drop tools",
+      "price": "$9.99",
+      "period": "/month",
+      "originalPrice": null,
+      "badge": null,
+      "learnMoreUrl": "https://www.godaddy.com/websites/website-builder"
+    },
+    {
+      "id": "business-email",
+      "icon": "mail",
+      "name": "Business Email",
+      "description": "Professional email with your domain name to build credibility",
+      "price": "$5.99",
+      "period": "/month",
+      "originalPrice": null,
+      "badge": null,
+      "learnMoreUrl": "https://www.godaddy.com/email"
+    },
+    {
+      "id": "ssl-certificate",
+      "icon": "shield",
+      "name": "SSL Certificate",
+      "description": "Secure your website and boost customer confidence with HTTPS",
+      "price": "$63.99",
+      "period": "/year",
+      "originalPrice": null,
+      "badge": null,
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate"
+    }
+  ]
+}
+
+

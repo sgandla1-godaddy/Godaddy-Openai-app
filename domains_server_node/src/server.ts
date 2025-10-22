@@ -95,6 +95,15 @@ const widgets: DomainWidget[] = [
     html: readWidgetHtml("domains-carousel"),
     responseText: "Here are some great domain options for your business!",
   },
+  {
+    id: "search-domains-fullscreen",
+    title: "Search Domain Names (List View)",
+    templateUri: "ui://widget/domains-list-fullscreen.html",
+    invoking: "Searching for available domain names",
+    invoked: "Found domain options for your business idea",
+    html: readWidgetHtml("domains-list-fullscreen"),
+    responseText: "Here are available domains in a detailed list view. You can expand to see all results and cross-sell options!",
+  }
 ];
 
 const widgetsById = new Map<string, DomainWidget>();
