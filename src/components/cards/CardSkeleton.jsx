@@ -186,6 +186,81 @@ export default function CardSkeleton({ variant = 'domain', showImage = false }) 
     );
   }
   
+  // Domain List Card Skeleton
+  if (variant === 'domain-list') {
+    return (
+      <div 
+        className={`px-4 -mx-2 rounded-2xl ${
+          isDark ? 'hover:bg-white/5' : 'hover:bg-black/5'
+        }`}
+        role="status"
+        aria-label="Loading domain list card"
+      >
+        <div
+          style={{
+            borderBottom: isDark ? "1px solid rgba(255, 255, 255, 0.05)" : "1px solid rgba(0, 0, 0, 0.05)",
+          }}
+          className="flex flex-col md:flex-row md:items-center w-full gap-2 py-3.5"
+        >
+          {/* Top section: Image + Info + Pricing */}
+          <div className="flex items-start gap-3 flex-1 min-w-0">
+            {/* Domain Image skeleton (optional) */}
+            {showImage && (
+              <div className="flex-shrink-0">
+                <div className={`${baseClasses} w-16 h-16 sm:w-20 sm:h-20 rounded-lg`} />
+              </div>
+            )}
+
+            {/* Domain Info */}
+            <div className="flex-1 min-w-0">
+              {/* Badge skeleton */}
+              <div className={`${baseClasses} h-4 w-20 mb-2`} />
+              
+              {/* Domain name skeleton */}
+              <div className="flex items-baseline gap-1 mb-1">
+                <div className={`${baseClasses} h-6 w-24`} />
+                <div className={`${baseClasses} h-6 w-12`} />
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile: Pricing + Actions */}
+          <div className="flex md:hidden items-center justify-between gap-3 w-full">
+            {/* Pricing skeleton */}
+            <div className="flex flex-col">
+              <div className="flex items-baseline gap-1.5 mb-1">
+                <div className={`${baseClasses} h-3 w-8`} />
+                <div className={`${baseClasses} h-5 w-12`} />
+              </div>
+              <div className={`${baseClasses} h-3 w-16`} />
+            </div>
+
+            {/* Actions skeleton */}
+            <div className="flex gap-2 items-center flex-shrink-0">
+              <div className={`${baseClasses} w-11 h-11 rounded-lg`} />
+              <div className={`${baseClasses} h-[44px] w-16 rounded-lg`} />
+            </div>
+          </div>
+
+          {/* Desktop: Pricing in middle */}
+          <div className="hidden md:flex flex-col items-end min-w-[110px]">
+            <div className="flex items-baseline gap-1.5 mb-0.5">
+              <div className={`${baseClasses} h-3 w-8`} />
+              <div className={`${baseClasses} h-6 w-12`} />
+            </div>
+            <div className={`${baseClasses} h-3 w-16`} />
+          </div>
+
+          {/* Desktop: Actions on right */}
+          <div className="hidden md:flex gap-2 items-center">
+            <div className={`${baseClasses} w-11 h-11 rounded-lg`} />
+            <div className={`${baseClasses} h-[44px] w-16 rounded-lg`} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Default fallback skeleton
   return (
     <div 

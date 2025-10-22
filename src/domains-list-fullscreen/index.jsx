@@ -5,6 +5,7 @@ import domainsData from "../mocks/domains.json";
 import crossSellData from "../mocks/cross-sell-products.json";
 import DomainListCard from "../components/cards/DomainListCard";
 import CrossSellCard from "../components/cards/CrossSellCard";
+import CardSkeleton from "../components/cards/CardSkeleton";
 import { useWidgetProps } from "../use-widget-props";
 import { useOpenAiGlobal } from "../use-openai-global";
 import { useMaxHeight } from "../use-max-height";
@@ -31,7 +32,7 @@ function App() {
   // Feature flags
   const useMockData = false;
   const showDomainImages = false;
-  const previewLimit = 2; // Number of domains to show in preview mode
+  const previewLimit = 3; // Number of domains to show in preview mode
   
   // Get data from MCP server via window.openai.toolOutput
   // Both carousel and list view receive the same toolOutput from ChatGPT
@@ -39,7 +40,7 @@ function App() {
   const domains = toolOutput?.domains || (useMockData ? domainsData?.domains : []) || [];
   const searchKeywords = toolOutput?.searchKeywords || domainsData?.query;
   const totalResults = toolOutput?.totalResults || domains.length;
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   
   // Display mode and height management
   const displayMode = useOpenAiGlobal("displayMode");
@@ -49,6 +50,13 @@ function App() {
   // Determine which domains to show based on mode
   const displayedDomains = isFullscreen ? domains : domains.slice(0, previewLimit);
   const hasMore = domains.length > previewLimit;
+
+  // Stop loading when domains are available
+  React.useEffect(() => {
+    if (domains && domains.length > 0) {
+      setIsLoading(false);
+    }
+  }, [domains]);
 
   React.useEffect(() => {
     console.log('[DomainsListFullscreen] Initialized with', domains.length, 'domains');
@@ -100,12 +108,19 @@ function App() {
         }`}>
           <div className="flex items-center justify-between">
             <div>
-              <h1 className={`text-xl sm:text-2xl font-semibold ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>
-                Available Domains
-              </h1>
-              {searchKeywords && (
+              {!isLoading && (
+                <h1 className={`text-lg font-semibold ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>
+                  Available Domains
+                </h1>
+              )}
+              {isLoading && (
+                <div className={`animate-pulse ${
+                  isDark ? 'bg-gray-700' : 'bg-gray-200'
+                } h-6 w-40 rounded mb-1`} />
+              )}
+              {searchKeywords && !isLoading && (
                 <p className={`text-sm mt-1 ${
                   isDark ? 'text-gray-300' : 'text-gray-600'
                 }`}>
@@ -115,6 +130,11 @@ function App() {
                   }
                 </p>
               )}
+              {searchKeywords && isLoading && (
+                <div className={`animate-pulse mt-1 ${
+                  isDark ? 'bg-gray-700' : 'bg-gray-200'
+                } h-4 w-48 rounded`} />
+              )}
             </div>
           </div>
         </div>
@@ -122,11 +142,14 @@ function App() {
         {/* Domain List */}
         <div className="min-w-full flex flex-col">
           {isLoading ? (
-            <div className={`py-8 text-center ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-              Loading domains...
-            </div>
+            // Show skeleton cards while loading
+            Array.from({ length: previewLimit }, (_, index) => (
+              <CardSkeleton
+                key={`skeleton-${index}`}
+                variant="domain-list"
+                showImage={showDomainImages}
+              />
+            ))
           ) : displayedDomains.length > 0 ? (
             displayedDomains.map((domain) => (
               <DomainListCard
