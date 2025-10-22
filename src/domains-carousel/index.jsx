@@ -140,13 +140,13 @@ function App() {
       {canPrev && (
         <button
           aria-label="View previous domains"
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-10 w-10 min-h-[44px] min-w-[44px] rounded-full bg-white text-gray-900 shadow-lg ring-1 ring-black/5 hover:bg-gray-50 active:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full bg-white text-gray-500 shadow-sm ring-1 ring-black/5 hover:text-gray-900 active:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 cursor-pointer"
           onClick={handlePrevious}
           type="button"
         >
           <ArrowLeft
             strokeWidth={1.5}
-            className="h-5 w-5"
+            className="h-3.5 w-3.5"
             aria-hidden="true"
           />
         </button>
@@ -154,30 +154,30 @@ function App() {
       {canNext && (
         <button
           aria-label="View next domains"
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-10 w-10 min-h-[44px] min-w-[44px] rounded-full bg-white text-gray-900 shadow-lg ring-1 ring-black/5 hover:bg-gray-50 active:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full bg-white text-gray-500 shadow-sm ring-1 ring-black/5 hover:text-gray-900 active:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 cursor-pointer"
           onClick={handleNext}
           type="button"
         >
           <ArrowRight
             strokeWidth={1.5}
-            className="h-5 w-5"
+            className="h-3.5 w-3.5"
             aria-hidden="true"
           />
         </button>
       )}
 
       {/* Show More Button - Per OpenAI guidelines */}
-      <div className="mt-4 flex justify-center">
+      {/* <div className="mt-4 flex justify-center">
         <button
           type="button"
           onClick={handleShowMore}
-          className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded px-3 py-2 min-h-[44px]"
+          className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded px-3 py-2 min-h-[44px] cursor-pointer"
           aria-label="Show more domain results"
         >
           Show more results
           <ChevronRight className="h-4 w-4" aria-hidden="true" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
