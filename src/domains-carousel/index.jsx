@@ -4,6 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import domainsData from "./domains.json";
 import DomainCard from "./DomainCard";
+import { useWidgetProps } from "../use-widget-props";
 
 /**
  * GoDaddy Domain Carousel
@@ -25,7 +26,9 @@ import DomainCard from "./DomainCard";
  */
 
 function App() {
-  const domains = domainsData?.domains || [];
+  // Get data from MCP server via window.openai.toolOutput
+  const toolOutput = useWidgetProps({ domains: domainsData?.domains || [] });
+  const domains = toolOutput?.domains || domainsData?.domains || [];
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
