@@ -1,36 +1,22 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import useEmblaCarousel from "embla-carousel-react";
-import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
-import domainsData from "./domains.json";
-import DomainCard from "./DomainCard";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import domainsData from "../mocks/domains.json";
+import DomainCard from "../components/cards/DomainCard";
+import CardSkeleton from "../components/cards/CardSkeleton";
+import ActionLink from "../components/ActionLink";
 import { useWidgetProps } from "../use-widget-props";
 
-/**
- * GoDaddy Domain Carousel
- * Production-ready component following OpenAI Apps SDK design guidelines
- * 
- * Display Mode: Inline Carousel
- * - Shows 3-8 domain options
- * - Horizontal scroll
- * - System fonts and colors
- * - Accessible keyboard navigation
- * - Touch-friendly (mobile-first)
- * 
- * Design Rules Compliance:
- * ✅ Conversational - fits naturally in chat flow
- * ✅ Simple - clear action per domain
- * ✅ Responsive - smooth 60fps scrolling
- * ✅ Accessible - WCAG AA, keyboard nav, ARIA labels
- * ✅ System colors with GoDaddy brand accents
- */
-
 function App() {
+  // Feature flag to use mock data for local development
+  const useMockData = false;
   // Get data from MCP server via window.openai.toolOutput
-  const toolOutput = useWidgetProps({ domains: domainsData?.domains || [] });
-  const domains = toolOutput?.domains || domainsData?.domains || [];
+  const toolOutput = useWidgetProps();
+  const domains = toolOutput?.domains || (useMockData ? domainsData?.domains : []) || [];
   const searchKeywords = toolOutput?.searchKeywords;
   const totalResults = toolOutput?.totalResults;
+  const [isLoading, setIsLoading] = React.useState(true);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
@@ -40,6 +26,13 @@ function App() {
   });
   const [canPrev, setCanPrev] = React.useState(false);
   const [canNext, setCanNext] = React.useState(false);
+
+  // Stop loading when domains are available
+  React.useEffect(() => {
+    if (domains && domains.length > 0) {
+      setIsLoading(false);
+    }
+  }, [domains]);
 
   // Track carousel state for telemetry
   React.useEffect(() => {
@@ -95,7 +88,7 @@ function App() {
       aria-label="Available domain names carousel"
     >
       {/* Search Context Header */}
-      {searchKeywords && (
+      {!isLoading && searchKeywords && (
         <div className="mb-4 px-5">
           <h2 className="text-lg font-semibold text-gray-900">
             Domain options for "{searchKeywords}"
@@ -109,15 +102,22 @@ function App() {
       )}
       {/* Carousel Container */}
       <div className="overflow-hidden" ref={emblaRef}>
-        <div 
-          className="flex gap-4 max-sm:mx-5 items-stretch"
-          role="list"
-        >
-          {domains.map((domain) => (
-            <div key={domain.id} role="listitem">
-              <DomainCard domain={domain} />
-            </div>
-          ))}
+        <div className="flex gap-4 max-sm:mx-5 items-stretch" role="list">
+          {isLoading ? (
+            // Show skeleton loaders while loading
+            Array.from({ length: 4 }).map((_, index) => (
+              <div key={`skeleton-${index}`} role="listitem">
+                <CardSkeleton variant="domain" />
+              </div>
+            ))
+          ) : (
+            // Show actual domain cards when loaded
+            domains.map((domain) => (
+              <div key={domain.id} role="listitem">
+                <DomainCard domain={domain} />
+              </div>
+            ))
+          )}
         </div>
       </div>
 
@@ -158,7 +158,7 @@ function App() {
       </div>
 
       {/* Navigation Buttons - Keyboard and mouse accessible */}
-      {canPrev && (
+      {!isLoading && canPrev && (
         <button
           aria-label="View previous domains"
           className="absolute left-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full bg-white text-gray-500 shadow-sm ring-1 ring-black/5 hover:text-gray-900 active:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 cursor-pointer"
@@ -172,7 +172,7 @@ function App() {
           />
         </button>
       )}
-      {canNext && (
+      {!isLoading && canNext && (
         <button
           aria-label="View next domains"
           className="absolute right-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full bg-white text-gray-500 shadow-sm ring-1 ring-black/5 hover:text-gray-900 active:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 cursor-pointer"
@@ -187,18 +187,17 @@ function App() {
         </button>
       )}
 
-      {/* Show More Button - Per OpenAI guidelines */}
-      {/* <div className="mt-4 flex justify-center">
-        <button
-          type="button"
-          onClick={handleShowMore}
-          className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 rounded px-3 py-2 min-h-[44px] cursor-pointer"
-          aria-label="Show more domain results"
-        >
-          Show more results
-          <ChevronRight className="h-4 w-4" aria-hidden="true" />
-        </button>
-      </div> */}
+      {/* Show more results button */}
+      {!isLoading && (
+        <div className="mt-4 flex justify-center">
+          <ActionLink
+            onClick={handleShowMore}
+            ariaLabel="Show more domain results"
+          >
+            Show more results
+          </ActionLink>
+        </div>
+      )}
     </div>
   );
 }

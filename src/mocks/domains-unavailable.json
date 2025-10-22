@@ -1,0 +1,107 @@
+{
+  "scenario": "unavailable",
+  "query": "Is google.com available?",
+  "requestedDomain": "google.com",
+  "domains": [
+    {
+      "id": "1",
+      "name": "google.com",
+      "price": "Not Available",
+      "originalPrice": null,
+      "period": null,
+      "description": "This domain is already registered",
+      "badge": "UNAVAILABLE",
+      "tld": ".com",
+      "available": false,
+      "isRequested": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%23dc2626' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E✗ Taken%3C/text%3E%3C/svg%3E",
+      "metrics": null
+    },
+    {
+      "id": "2",
+      "name": "googlesearch.com",
+      "price": "$11.99",
+      "originalPrice": "$21.99",
+      "period": "for first year",
+      "description": "Close alternative - great for search-related services",
+      "badge": "GREAT ALTERNATIVE",
+      "tld": ".com",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 3,
+        "memorable": 4,
+        "popular": 4
+      }
+    },
+    {
+      "id": "3",
+      "name": "googleplus.com",
+      "price": "$11.99",
+      "originalPrice": "$21.99",
+      "period": "for first year",
+      "description": "Similar name - perfect for Google-related services",
+      "badge": "AVAILABLE",
+      "tld": ".com",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 3,
+        "memorable": 4,
+        "popular": 4
+      }
+    },
+    {
+      "id": "4",
+      "name": "thegoogle.com",
+      "price": "$11.99",
+      "originalPrice": "$21.99",
+      "period": "for first year",
+      "description": "Memorable alternative with 'the' prefix",
+      "badge": "AVAILABLE",
+      "tld": ".com",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%231e40af' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.com%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 4,
+        "memorable": 5,
+        "popular": 3
+      }
+    },
+    {
+      "id": "5",
+      "name": "google.io",
+      "price": "$39.99",
+      "originalPrice": "$49.99",
+      "period": "for first year",
+      "description": "Modern tech-focused alternative",
+      "badge": "AVAILABLE",
+      "tld": ".io",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%237c3aed' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.io%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 4,
+        "memorable": 5,
+        "popular": 5
+      }
+    },
+    {
+      "id": "6",
+      "name": "google.net",
+      "price": "$14.99",
+      "originalPrice": "$24.99",
+      "period": "for first year",
+      "description": "Alternative extension for the same name",
+      "badge": "AVAILABLE",
+      "tld": ".net",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%23059669' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.net%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 3,
+        "memorable": 5,
+        "popular": 2
+      }
+    }
+  ]
+}
+

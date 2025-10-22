@@ -1,0 +1,98 @@
+{
+  "scenario": "check_availability",
+  "query": "Is techstartup.com available?",
+  "requestedDomain": "techstartup.com",
+  "domains": [
+    {
+      "id": "1",
+      "name": "techstartup.com",
+      "price": "$2,995.00",
+      "originalPrice": null,
+      "period": "for first year",
+      "description": "Premium domain - perfect for tech companies and startups",
+      "badge": "AVAILABLE",
+      "tld": ".com",
+      "available": true,
+      "isPremium": true,
+      "isRequested": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%2310b981' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E✓ Available%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 4,
+        "memorable": 5,
+        "popular": 5
+      },
+      "bundleOptions": [
+        {
+          "id": "hosting",
+          "name": "Web Hosting",
+          "price": "$5.99/mo",
+          "description": "Professional hosting with 99.9% uptime"
+        },
+        {
+          "id": "email",
+          "name": "Professional Email",
+          "price": "$6.99/mo",
+          "description": "Custom email addresses for your domain"
+        },
+        {
+          "id": "ssl",
+          "name": "SSL Certificate",
+          "price": "$79.99/yr",
+          "description": "Secure your website with HTTPS"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "techstartup.io",
+      "price": "$39.99",
+      "originalPrice": "$49.99",
+      "period": "for first year",
+      "description": "Modern tech-focused alternative",
+      "badge": "AVAILABLE",
+      "tld": ".io",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%237c3aed' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.io%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 4,
+        "memorable": 5,
+        "popular": 5
+      }
+    },
+    {
+      "id": "3",
+      "name": "techstartup.co",
+      "price": "$24.99",
+      "originalPrice": "$34.99",
+      "period": "for first year",
+      "description": "Short and professional alternative",
+      "badge": "AVAILABLE",
+      "tld": ".co",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%23059669' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.co%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 4,
+        "memorable": 5,
+        "popular": 4
+      }
+    },
+    {
+      "id": "4",
+      "name": "techstartup.net",
+      "price": "$14.99",
+      "originalPrice": "$24.99",
+      "period": "for first year",
+      "description": "Classic alternative extension",
+      "badge": "AVAILABLE",
+      "tld": ".net",
+      "available": true,
+      "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='%23059669' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.net%3C/text%3E%3C/svg%3E",
+      "metrics": {
+        "emotional": 4,
+        "memorable": 5,
+        "popular": 3
+      }
+    }
+  ]
+}
+
