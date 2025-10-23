@@ -3,7 +3,7 @@ import { useTheme } from "../../use-theme";
 
 /**
  * Unified loading skeleton for card components
- * @param {string} variant - Type of card: 'domain', 'featured', 'bundle', 'taken'
+ * @param {string} variant - Type of card: 'domain', 'featured', 'bundle', 'taken', 'product'
  * @param {boolean} showImage - Whether to show an image skeleton (for domain cards)
  */
 export default function CardSkeleton({ variant = 'domain', showImage = false }) {
@@ -274,5 +274,84 @@ export default function CardSkeleton({ variant = 'domain', showImage = false }) 
       <div className={`${baseClasses} h-[44px] w-full rounded-lg`} />
     </div>
   );
+
+  // Product Card Skeleton
+  if (variant === 'product') {
+    return (
+      <div
+        className={`relative border rounded-lg p-6 flex flex-col ${
+          isDark ? 'bg-[#1a1d29]/60 border-white/10' : 'bg-white border-gray-200'
+        }`}
+        role="status"
+        aria-label="Loading product card"
+      >
+        {/* Badge skeleton - positioned absolutely like in ProductCard */}
+        <div className={`${baseClasses} h-6 w-24 mb-4 absolute top-4 right-4 rounded-full`} />
+        
+        {/* Content Section */}
+        <div className="flex-1">
+          {/* Product Visual skeleton (optional) */}
+          <div className="mb-4">
+            <div className={`${baseClasses} w-full h-32 rounded-lg`} />
+          </div>
+          
+          {/* Title and Icon row */}
+          <div className="mb-4">
+            <div className="flex items-start gap-4">
+              {/* Icon skeleton */}
+              <div className={`${baseClasses} w-12 h-12 rounded-lg flex-shrink-0`} />
+              <div className="flex-1 min-w-0">
+                {/* Title skeleton */}
+                <div className={`${baseClasses} h-6 w-3/4 mb-2`} />
+                
+                {/* Tags skeleton */}
+                <div className="flex flex-wrap gap-2 mb-3">
+                  <div className={`${baseClasses} h-5 w-16 rounded`} />
+                  <div className={`${baseClasses} h-5 w-20 rounded`} />
+                  <div className={`${baseClasses} h-5 w-14 rounded`} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Description skeleton */}
+          <div className="mb-4">
+            <div className={`${baseClasses} h-4 w-full mb-2`} />
+            <div className={`${baseClasses} h-4 w-5/6 mb-1`} />
+            <div className={`${baseClasses} h-4 w-2/3`} />
+          </div>
+
+          {/* Learn more link skeleton */}
+          <div className="mb-3">
+            <div className={`${baseClasses} h-4 w-40`} />
+          </div>
+        </div>
+
+        {/* Bottom Section - Pricing and Add to Cart */}
+        <div className="flex items-end justify-between gap-4">
+          {/* Pricing Section */}
+          <div className="flex-1 min-w-0">
+            {/* "AS LOW AS" badge skeleton */}
+            <div className={`${baseClasses} h-5 w-20 mb-2 rounded`} />
+            
+            {/* Price row skeleton */}
+            <div className="flex items-baseline gap-2 mb-1">
+              <div className={`${baseClasses} h-4 w-12`} />
+              <div className={`${baseClasses} h-8 w-16`} />
+              <div className={`${baseClasses} h-4 w-8`} />
+            </div>
+            
+            {/* Savings text skeleton */}
+            <div className={`${baseClasses} h-3 w-24`} />
+          </div>
+
+          {/* Add to Cart Button skeleton */}
+          <div className="flex-shrink-0">
+            <div className={`${baseClasses} w-11 h-11 rounded-lg`} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 

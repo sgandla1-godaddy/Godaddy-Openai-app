@@ -1,0 +1,69 @@
+{
+  "products": [
+    {
+      "id": "email-essentials",
+      "category": "email",
+      "name": "Microsoft 365 Email Essentials",
+      "description": "Best for building trust — with an email address that matches your domain. Plus, get 10 GB email storage, world-class data security, and spam filtering.",
+      "price": "$1.99",
+      "period": "/user/mo",
+      "originalPrice": "$7.99",
+      "tags": ["EMAIL MATCHES DOMAIN"],
+      "learnMoreUrl": "https://www.godaddy.com/email",
+      "icon": "mail",
+      "visual": "https://img1.wsimg.com/cdn/Image/All/All/1/All/af30fba5-406f-4f61-9969-4a076b6b062c/feature-category-email2x.jpg",
+      "features": [
+        "10 GB email storage",
+        "Professional email with your domain",
+        "World-class data security and spam filtering"
+      ],
+      "storage": "10 GB",
+      "savings": "Save 75%"
+    },
+    {
+      "id": "email-plus",
+      "category": "email",
+      "name": "Microsoft 365 Email Plus with Security",
+      "description": "Best for scaling businesses. Get Email Essentials with 50 GB email storage for your growing customer list and marketing to them.",
+      "price": "$5.99",
+      "period": "/user/mo",
+      "originalPrice": "$9.99",
+      "tags": ["ADDITIONAL STORAGE"],
+      "learnMoreUrl": "https://www.godaddy.com/email",
+      "icon": "mail",
+      "visual": "https://img1.wsimg.com/cdn/Image/All/All/1/All/af30fba5-406f-4f61-9969-4a076b6b062c/feature-category-email2x.jpg",
+      "features": [
+        "50 GB email storage",
+        "Advanced security features",
+        "Professional email with your domain"
+      ],
+      "storage": "50 GB",
+      "savings": "Save 40%"
+    },
+    {
+      "id": "email-professional",
+      "category": "email",
+      "name": "Microsoft 365 Secure Business Professional",
+      "description": "Best for maximizing productivity. Get Email Plus and Microsoft 365 apps like Word, Excel, PowerPoint, and Teams. Includes 1 TB secure OneDrive storage for your growth.",
+      "price": "$11.99",
+      "period": "/user/mo",
+      "originalPrice": "$26.99",
+      "tags": ["M365 OFFICE APPS"],
+      "learnMoreUrl": "https://www.godaddy.com/email",
+      "icon": "mail",
+      "visual": "https://img1.wsimg.com/cdn/Image/All/All/1/All/af30fba5-406f-4f61-9969-4a076b6b062c/feature-category-email2x.jpg",
+      "savings": "55% savings with an annual term",
+      "features": [
+        "1 TB secure OneDrive storage",
+        "Microsoft 365 apps (Word, Excel, PowerPoint, Teams)",
+        "Professional email with your domain",
+        "Advanced security and compliance features"
+      ],
+      "storage": "1 TB",
+      "badge": "MOST POPULAR"
+    }
+  ],
+  "category": "email",
+  "categoryName": "Email Plans",
+  "description": "Professional email with your domain"
+}

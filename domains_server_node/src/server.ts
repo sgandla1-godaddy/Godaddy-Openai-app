@@ -86,26 +86,26 @@ function widgetMeta(widget: DomainWidget) {
 }
 
 const widgets: DomainWidget[] = [
-  {
-    id: "generic-search-domains",
-    title: "Search Domain Names",
-    templateUri: "ui://widget/domain-carousel.html",
-    invoking: "Searching for available domain names",
-    invoked: "Found domain options for your business idea",
-    html: readWidgetHtml("domains-carousel"),
-    responseText: "Here are some great domain options for your business!",
-  },
+  // {
+  //   id: "generic-search-domains",
+  //   title: "Search Domain Names",
+  //   templateUri: "ui://widget/domain-carousel.html",
+  //   invoking: "Searching for available domain names",
+  //   invoked: "Found domain options for your business idea",
+  //   html: readWidgetHtml("domains-carousel"),
+  //   responseText: "Here are some great domain options for your business!",
+  // },
   {
     id: "cheap-search-domains",
     title: "Search Cheap Domain Names",
-    templateUri: "ui://widget/domain-carousel.html",
+    templateUri: "ui://widget/domain-list-fullscreen.html",
     invoking: "Searching for domain names when prompt specifically requests cheap available domainnames",
     invoked: "Found cheap domain options for your business idea when prompt specifically requests cheap available domainnames",
-    html: readWidgetHtml("domains-carousel"),
+    html: readWidgetHtml("domains-list-fullscreen"),
     responseText: "Here are some cheap domain options for your business!",
   },
   {
-    id: "generic-search-domains-fullscreen",
+    id: "generic-search-domains",
     title: "Search Domain Names (List View)",
     templateUri: "ui://widget/domains-list-fullscreen.html",
     invoking: "Searching for available domain names",
@@ -113,6 +113,24 @@ const widgets: DomainWidget[] = [
     html: readWidgetHtml("domains-list-fullscreen"),
     responseText: "Here are available domains in a detailed list view. You can expand to see all results and cross-sell options!",
   },
+  {
+    id: "list-all-products",
+    title: "List All GodaddyProducts",
+    templateUri: "ui://widget/products-list.html",
+    invoking: "Finding all Godaddy products",
+    invoked: "Found products for your business",
+    html: readWidgetHtml("products-list"),
+    responseText: "Here are some great products for your business!",
+  },
+  {
+    id: "recommend-products",
+    title: "Recommend Product Plans",
+    templateUri: "ui://widget/products-recommend.html",
+    invoking: "Finding recommended product plans",
+    invoked: "Found recommended plans for your business",
+    html: readWidgetHtml("products-recommend"),
+    responseText: "Here are recommended product plans for your business!",
+  }
 ];
 
 const widgetsById = new Map<string, DomainWidget>();
@@ -131,7 +149,7 @@ const toolInputSchema = {
   properties: {
     keywords: {
       type: "string",
-      description: "The user's original request or query about domains (preserve the exact wording to analyze context)",
+      description: "The user's original request or query (preserve the exact wording to analyze context)",
     },
     domainName: {
       type: "string",
@@ -148,15 +166,208 @@ const toolInputSchema = {
     budget: {
       type: "string",
       description: "Budget range for domain (e.g., 'under $50', 'premium', 'any')",
-    }
+    },
+    category: {
+      type: "string",
+      description: "Product category to recommend or show (e.g., 'email', 'website', 'ssl-security')",
+    },
   },
-  required: ["keywords"], // Make only keywords required
+  required: ["keywords"], // Make keywords required for all tools
   additionalProperties: false,
 } as const;
 
 const toolInputParser = z.object({
-  keywords: z.string()
+  keywords: z.string(),
+  category: z.string().optional()
 });
+
+/**
+ * Load product recommendations based on category
+ */
+async function loadProductRecommendations(category: string = "email") {
+  try {
+    console.log(`[ProductRecommend] Loading recommendations for category: "${category}"`);
+    
+    // For now, we'll use mock data based on category
+    // In a real implementation, this would call a product API
+    const mockProducts = {
+      email: [
+        {
+          id: "email-essentials",
+          category: "email",
+          name: "Microsoft 365 Email Essentials",
+          description: "Best for building trust — with an email address that matches your domain. Plus, get 10 GB email storage, world-class data security, and spam filtering.",
+          price: "$1.99",
+          period: "/user/mo",
+          originalPrice: "$7.99",
+          tags: ["EMAIL MATCHES DOMAIN"],
+          learnMoreUrl: "https://www.godaddy.com/email",
+          icon: "mail",
+          visual: "https://img1.wsimg.com/cdn/Image/All/All/1/All/af30fba5-406f-4f61-9969-4a076b6b062c/feature-category-email2x.jpg",
+          features: [
+            "10 GB email storage",
+            "Professional email with your domain",
+            "World-class data security and spam filtering"
+          ],
+          storage: "10 GB",
+          savings: "Save 75%"
+        },
+        {
+          id: "email-plus",
+          category: "email",
+          name: "Microsoft 365 Email Plus with Security",
+          description: "Best for scaling businesses. Get Email Essentials with 50 GB email storage for your growing customer list and marketing to them.",
+          price: "$5.99",
+          period: "/user/mo",
+          originalPrice: "$9.99",
+          tags: ["ADDITIONAL STORAGE"],
+          learnMoreUrl: "https://www.godaddy.com/email",
+          icon: "mail",
+          visual: "https://img1.wsimg.com/cdn/Image/All/All/1/All/af30fba5-406f-4f61-9969-4a076b6b062c/feature-category-email2x.jpg",
+          features: [
+            "50 GB email storage",
+            "Advanced security features",
+            "Professional email with your domain"
+          ],
+          storage: "50 GB",
+          savings: "Save 40%"
+        },
+        {
+          id: "email-professional",
+          category: "email",
+          name: "Microsoft 365 Secure Business Professional",
+          description: "Best for maximizing productivity. Get Email Plus and Microsoft 365 apps like Word, Excel, PowerPoint, and Teams. Includes 1 TB secure OneDrive storage for your growth.",
+          price: "$11.99",
+          period: "/user/mo",
+          originalPrice: "$26.99",
+          tags: ["M365 OFFICE APPS"],
+          learnMoreUrl: "https://www.godaddy.com/email",
+          icon: "mail",
+          visual: "https://img1.wsimg.com/cdn/Image/All/All/1/All/af30fba5-406f-4f61-9969-4a076b6b062c/feature-category-email2x.jpg",
+          savings: "55% savings with an annual term",
+          features: [
+            "1 TB secure OneDrive storage",
+            "Microsoft 365 apps (Word, Excel, PowerPoint, Teams)",
+            "Professional email with your domain",
+            "Advanced security and compliance features"
+          ],
+          storage: "1 TB",
+          badge: "MOST POPULAR"
+        }
+      ],
+      website: [
+        {
+          id: "website-builder-basic",
+          category: "website",
+          name: "Website Builder Basic",
+          description: "Get your business moving with a professional website, email address and marketing tools",
+          price: "$10.99",
+          period: "/mo",
+          originalPrice: "$16.99",
+          tags: ["FOR GETTING STARTED"],
+          learnMoreUrl: "https://www.godaddy.com/websites/website-builder",
+          icon: "globe",
+          visual: "https://img1.wsimg.com/cdn/Image/All/All/1/All/3650f391-adb0-4258-a855-d79e50927976/feature-category-websites2x.jpg",
+          savings: "Save 35%"
+        },
+        {
+          id: "website-builder-premium",
+          category: "website",
+          name: "Website Builder Premium",
+          description: "Reach more customers with expanded social media and email marketing tools",
+          price: "$16.99",
+          period: "/mo",
+          originalPrice: "$29.99",
+          tags: ["FOR LARGER CUSTOMER REACH"],
+          learnMoreUrl: "https://www.godaddy.com/websites/website-builder",
+          icon: "globe",
+          visual: "https://img1.wsimg.com/cdn/Image/All/All/1/All/3650f391-adb0-4258-a855-d79e50927976/feature-category-websites2x.jpg",
+          savings: "Save 43%",
+          badge: "RECOMMENDED"
+        },
+        {
+          id: "website-builder-commerce",
+          category: "website",
+          name: "Website Builder Commerce",
+          description: "Easily manage your inventory and sell online",
+          price: "$23.99",
+          period: "/mo",
+          originalPrice: "$34.99",
+          tags: ["FOR SCALABILITY AND AUTOMATION"],
+          learnMoreUrl: "https://www.godaddy.com/websites/website-builder",
+          icon: "globe",
+          visual: "https://img1.wsimg.com/cdn/Image/All/All/1/All/3650f391-adb0-4258-a855-d79e50927976/feature-category-websites2x.jpg",
+          savings: "Save 31%"
+        }
+      ],
+      "ssl-security": [
+        {
+          id: "ssl-dv-single-domain",
+          category: "ssl-security",
+          name: "Single Domain DV SSL",
+          description: "Basic SSL certificate.",
+          price: "$69.99",
+          period: "/yr",
+          originalPrice: "$119.99",
+          tags: ["1 WEBSITE"],
+          learnMoreUrl: "https://www.godaddy.com/web-security/ssl-certificate",
+          icon: "shield",
+          visual: "https://img1.wsimg.com/cdnassets/transform/e3f72038-9d34-4119-80e9-4a0277439707/FOSMO-97668-SSL-Marquee-Image-Bug",
+          savings: "Save 41%"
+        },
+        {
+          id: "ssl-dv-managed",
+          category: "ssl-security",
+          name: "Managed DV SSL Certificate",
+          description: "Leave installation and maintenance to GoDaddy, while enjoying higher rankings and more traffic.",
+          price: "$99.99",
+          period: "/yr",
+          originalPrice: "$199.99",
+          tags: ["1 WEBSITE", "FULLY MANAGED"],
+          learnMoreUrl: "https://www.godaddy.com/web-security/ssl-certificate",
+          icon: "shield",
+          visual: "https://img1.wsimg.com/cdnassets/transform/ad6407d6-dd19-40e3-8065-7deb0683af83/mrq-en-mssl-fosmo-90846",
+          savings: "Save 50%",
+          badge: "INSTALLED IN UNDER 1 HOUR"
+        },
+        {
+          id: "ssl-san-multi-domain",
+          category: "ssl-security",
+          name: "Multi-domain SAN SSL Certificate",
+          description: "Encrypt multiple websites and/or servers while saving cost vs. multiple single-domain certificates.",
+          price: "$219.99",
+          period: "/yr",
+          originalPrice: "$299.99",
+          tags: ["5 WEBSITES"],
+          learnMoreUrl: "https://www.godaddy.com/web-security/ssl-certificate",
+          icon: "shield",
+          visual: "https://img1.wsimg.com/cdnassets/transform/e3f72038-9d34-4119-80e9-4a0277439707/FOSMO-97668-SSL-Marquee-Image-Bug",
+          savings: "Save 26%"
+        }
+      ]
+    };
+
+    const products = mockProducts[category as keyof typeof mockProducts] || mockProducts.email;
+    
+    console.log(`[ProductRecommend] Loaded ${products.length} products for category: ${category}`);
+
+    return {
+      products,
+      category,
+      totalResults: products.length,
+    };
+  } catch (error) {
+    console.error('[ProductRecommend] Error loading product recommendations:', error);
+    
+    // Fallback to email products if error
+    return {
+      products: [],
+      category,
+      totalResults: 0,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+}
 
 /**
  * Call GoDaddy API to get real domain search results
@@ -295,18 +506,30 @@ function generateDomainImage(tld: string): string {
   return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='${encodeURIComponent(color)}' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.${tld}%3C/text%3E%3C/svg%3E`;
 }
 
-const tools: Tool[] = widgets.map((widget) => ({
-  name: widget.id,
-  description: "Search for domain names based on user's business idea or request. Pass the user's exact words in the 'keywords' parameter to preserve context.",
-  inputSchema: toolInputSchema,
-  title: widget.title,
-  _meta: widgetMeta(widget),
-  annotations: {
-    destructiveHint: false,
-    openWorldHint: false,
-    readOnlyHint: true,
+const tools: Tool[] = widgets.map((widget) => {
+  // Determine description based on widget type
+  let description: string;
+  if (widget.id.includes('domains')) {
+    description = "Search for domain names based on user's business idea or request. Pass the user's exact words in the 'keywords' parameter to preserve context.";
+  } else if (widget.id.includes('products')) {
+    description = "Find and recommend GoDaddy products and services based on user's business needs. Pass the user's exact words in the 'keywords' and 'category' parameter to preserve context.";
+  } else {
+    description = "Search for GoDaddy services based on user's business idea or request. Pass the user's exact words in the 'keywords' parameter to preserve context.";
   }
-}));
+
+  return {
+    name: widget.id,
+    description,
+    inputSchema: toolInputSchema,
+    title: widget.title,
+    _meta: widgetMeta(widget),
+    annotations: {
+      destructiveHint: false,
+      openWorldHint: false,
+      readOnlyHint: true,
+    }
+  };
+});
 
 const resources: Resource[] = widgets.map((widget) => ({
   uri: widget.templateUri,
@@ -391,6 +614,25 @@ function createDomainsServer(): Server {
       }
       const args = toolInputParser.parse(request.params.arguments ?? {});
 
+
+      // Handle product recommendations
+      if (widget.id === "recommend-products") {
+        const productResults = await loadProductRecommendations(args.category || "email");
+        return {
+          content: [
+            {
+              type: "text",
+              text: `${widget.responseText} Found ${productResults.products.length} recommended plans for ${productResults.category} products`,
+            },
+          ],
+          structuredContent: {
+            ...productResults,
+          },
+          _meta: widgetMeta(widget),
+        };
+      }
+
+      // Handle domain search
       let domainResults;
       if (widget.id === "cheap-search-domains") {
         domainResults = await loadCheapCustomDomains(args.keywords);

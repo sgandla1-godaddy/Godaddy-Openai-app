@@ -23,6 +23,8 @@ const targets: string[] = [
   "pizzaz-albums",
   "domains-carousel",
   "domains-list-fullscreen",
+  "products-list",
+  "products-recommend",
   "godaddy"
 ];
 const builtNames: string[] = [];

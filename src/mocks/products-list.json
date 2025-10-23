@@ -1,0 +1,554 @@
+{
+  "products": [
+    {
+      "id": "ssl-dv-single-domain",
+      "category": "ssl-security",
+      "name": "Single Domain DV SSL",
+      "description": "Basic SSL certificate.",
+      "price": "$69.99",
+      "period": "/yr",
+      "originalPrice": "$119.99",
+      "tags": ["1 WEBSITE"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/e3f72038-9d34-4119-80e9-4a0277439707/FOSMO-97668-SSL-Marquee-Image-Bug",
+      "savings": "Save 41%",
+      "features": [
+        "Standard level domain validation (DV)",
+        "1x encryption refresh, annually",
+        "Self-installation",
+        "Yearly validation may be required depending on your URL"
+      ]
+    },
+    {
+      "id": "ssl-dv-managed",
+      "category": "ssl-security",
+      "name": "Managed DV SSL Certificate",
+      "description": "Leave installation and maintenance to GoDaddy, while enjoying higher rankings and more traffic.",
+      "price": "$99.99",
+      "period": "/yr",
+      "originalPrice": "$199.99",
+      "tags": ["1 WEBSITE", "FULLY MANAGED"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/ad6407d6-dd19-40e3-8065-7deb0683af83/mrq-en-mssl-fosmo-90846",
+      "savings": "Save 50%",
+      "features": [
+        "Standard level domain validation (DV)",
+        "5x encryption refresh, annually",
+        "GoDaddy handles the installation, reinstallation, ongoing maintenance, monitoring, and trouble shooting",
+        "Designed for a single-server hosted domain using a control panel such as cPanel",
+        "Validation is fully managed by GoDaddy"
+      ],
+      "badge": "INSTALLED IN UNDER 1 HOUR"
+    },
+    {
+      "id": "ssl-san-multi-domain",
+      "category": "ssl-security",
+      "name": "Multi-domain SAN SSL Certificate",
+      "description": "Encrypt multiple websites and/or servers while saving cost vs. multiple single-domain certificates.",
+      "price": "$219.99",
+      "period": "/yr",
+      "originalPrice": "$299.99",
+      "tags": ["5 WEBSITES"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/e3f72038-9d34-4119-80e9-4a0277439707/FOSMO-97668-SSL-Marquee-Image-Bug",
+      "savings": "Save 26%",
+      "features": [
+        "Standard level domain validation (DV)",
+        "1x encryption refresh, annually",
+        "Self-installation",
+        "Encrypts 5 websites. Plans for up to 100 sites available in cart",
+        "Manage all sites from one dashboard",
+        "Yearly validation may be required depending on your URL"
+      ]
+    },
+    {
+      "id": "ssl-dv-wildcard",
+      "category": "ssl-security",
+      "name": "Wildcard DV SSL",
+      "description": "Encrypt your primary domain and unlimited subdomains with this cost-effective certificate.",
+      "price": "$349.99",
+      "period": "/yr",
+      "originalPrice": "$499.99",
+      "tags": ["1 WEBSITE", "UNLTD. SUBDOMAINS"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/e3f72038-9d34-4119-80e9-4a0277439707/FOSMO-97668-SSL-Marquee-Image-Bug",
+      "savings": "Save 30%",
+      "features": [
+        "Standard level domain validation (DV)",
+        "1x encryption refresh, annually",
+        "Self-installation",
+        "Encrypts 1 website and unlimited subdomains",
+        "Encrypts all your servers and subdomains",
+        "Yearly validation may be required depending on your URL"
+      ]
+    },
+    {
+      "id": "ssl-managed-dv-service",
+      "category": "ssl-security",
+      "name": "Managed DV SSL Service",
+      "description": "Includes 1 Managed Standard DV SSL Certificate for 1 personal website",
+      "price": "$99.99",
+      "period": "/yr",
+      "originalPrice": "$199.99",
+      "tags": ["ONE WEBSITE"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/ad6407d6-dd19-40e3-8065-7deb0683af83/mrq-en-mssl-fosmo-90846",
+      "savings": "Save 50%",
+      "features": [
+        "Secures 1 domain",
+        "5x encryption refresh, annually",
+        "Installation and management on 1 server. Requires hosting platforms with a control panel"
+      ]
+    },
+    {
+      "id": "ssl-managed-san-service",
+      "category": "ssl-security",
+      "name": "Managed SAN SSL Service",
+      "description": "Includes 1 UCC/SAN DV SSL Certificate for multiple personal websites",
+      "price": "$269.99",
+      "period": "/yr",
+      "originalPrice": "$349.99",
+      "tags": ["FIVE WEBSITES"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/ad6407d6-dd19-40e3-8065-7deb0683af83/mrq-en-mssl-fosmo-90846",
+      "savings": "Save 22%",
+      "features": [
+        "Secures 5 domains. Secure up to 15 for an additional fee",
+        "5x encryption refresh, annually",
+        "Installation and management on 1 server. Requires hosting platforms with a control panel"
+      ]
+    },
+    {
+      "id": "ssl-managed-wildcard-service",
+      "category": "ssl-security",
+      "name": "Managed Wildcard SSL Service",
+      "description": "Includes 1 Managed Wildcard DV SSL Certificate for a website with multiple subdomains",
+      "price": "$399.99",
+      "period": "/yr",
+      "originalPrice": "$499.99",
+      "tags": ["ONE WEBSITE AND UP TO 9 SUBDOMAINS"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/ad6407d6-dd19-40e3-8065-7deb0683af83/mrq-en-mssl-fosmo-90846",
+      "savings": "Save 20%",
+      "features": [
+        "Secures 1 domain and up to 9 subdomains",
+        "5x encryption refresh, annually",
+        "Installation and management on 1 server. Requires hosting platforms with a control panel"
+      ]
+    },
+    {
+      "id": "website-security-standard",
+      "category": "ssl-security",
+      "name": "Standard",
+      "description": "Basic website security with daily scanning, firewall, site monitoring and an SSL Certificate.",
+      "price": "$6.99",
+      "period": "/mo",
+      "originalPrice": "$12.99",
+      "tags": ["BASIC SECURITY"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/e3f72038-9d34-4119-80e9-4a0277439707/FOSMO-97668-SSL-Marquee-Image-Bug",
+      "savings": "Save 46%",
+      "features": [
+        "Helps protect one website",
+        "Site cleanup and repair 1x per year",
+        "Free trial Norton Small Business Cybersecurity, 6 devices"
+      ],
+      "guarantee": "100% risk-free, 30-day money-back guarantee"
+    },
+    {
+      "id": "website-security-advanced",
+      "category": "ssl-security",
+      "name": "Advanced",
+      "description": "Ideal for websites that want heightened security — includes daily backups, DDoS, CDN boost, or for sites with security issues.",
+      "price": "$11.99",
+      "period": "/mo",
+      "originalPrice": "$19.99",
+      "tags": ["COMPREHENSIVE SECURITY"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/e3f72038-9d34-4119-80e9-4a0277439707/FOSMO-97668-SSL-Marquee-Image-Bug",
+      "savings": "Save 40%",
+      "features": [
+        "Helps protect one website",
+        "Site cleanup and repair 5x per year",
+        "25 GB of secure daily backup",
+        "Up to 5x faster performance and DDoS protection",
+        "Free trial Norton Small Business Cybersecurity, 6 devices"
+      ],
+      "guarantee": "100% risk-free, 30-day money-back guarantee",
+      "badge": "MULTIPLE WEBSITE CLEANUPS"
+    },
+    {
+      "id": "website-security-premium",
+      "category": "ssl-security",
+      "name": "Premium",
+      "description": "Our best plan. Perfect for brand and ecommerce websites that need priority support and the fastest malware removal turnaround.",
+      "price": "$16.99",
+      "period": "/mo",
+      "originalPrice": "$29.99",
+      "tags": ["PRIORITY SUPPORT"],
+      "learnMoreUrl": "https://www.godaddy.com/web-security/ssl-certificate",
+      "icon": "shield",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/e3f72038-9d34-4119-80e9-4a0277439707/FOSMO-97668-SSL-Marquee-Image-Bug",
+      "savings": "Save 43%",
+      "features": [
+        "Helps protect one website",
+        "Unlimited website cleanup and repair",
+        "Unlimited storage space, secure daily backup",
+        "Up to 5x faster performance and DDoS protection",
+        "Free trial Norton Small Business Cybersecurity, 6 devices"
+      ],
+      "guarantee": "100% risk-free, 30-day money-back guarantee"
+    },
+    {
+      "id": "website-builder-basic",
+      "category": "website",
+      "type": "website-builder",
+      "name": "Website Builder Basic",
+      "description": "Get your business moving with a professional website, email address and marketing tools",
+      "price": "$10.99",
+      "period": "/mo",
+      "originalPrice": "$16.99",
+      "tags": ["FOR GETTING STARTED"],
+      "learnMoreUrl": "https://www.godaddy.com/websites/website-builder",
+      "icon": "globe",
+      "visual": "https://img1.wsimg.com/cdn/Image/All/All/1/All/3650f391-adb0-4258-a855-d79e50927976/feature-category-websites2x.jpg",
+      "savings": "Save 35%",
+      "features": [
+        "Connect a custom domain",
+        "Search Engine Optimization tools to rank higher on Google",
+        "Easy-to-use website editing tools",
+        "Time-saving AI writing and content creation",
+        "Know how you're performing with Site analytics",
+        "Free Professional Email",
+        "Build customer trust by displaying the TrustedSite trustmark on your website",
+        "Create and send email marketing campaigns to 25,000 users per month",
+        "Connect with customers through live chat and contact forms",
+        "Help secure sensitive information with an SSL",
+        "Ability to remove \"Powered by GoDaddy\" branding",
+        "Quickly create content with GoDaddy Studio"
+      ]
+    },
+    {
+      "id": "website-builder-premium",
+      "category": "website",
+      "type": "website-builder",
+      "name": "Website Builder Premium",
+      "description": "Reach more customers with expanded social media and email marketing tools",
+      "price": "$16.99",
+      "period": "/mo",
+      "originalPrice": "$29.99",
+      "tags": ["FOR LARGER CUSTOMER REACH"],
+      "learnMoreUrl": "https://www.godaddy.com/websites/website-builder",
+      "icon": "globe",
+      "visual": "https://img1.wsimg.com/cdn/Image/All/All/1/All/3650f391-adb0-4258-a855-d79e50927976/feature-category-websites2x.jpg",
+      "savings": "Save 43%",
+      "features": [
+        "Lower-tier features, plus:",
+        "Allow customers to book appointments and events",
+        "Take online payments and deposits",
+        "Create, schedule, and manage unlimited digital ads on Meta and Google"
+      ],
+      "badge": "RECOMMENDED"
+    },
+    {
+      "id": "website-builder-commerce",
+      "category": "website",
+      "type": "website-builder",
+      "name": "Website Builder Commerce",
+      "description": "Easily manage your inventory and sell online",
+      "price": "$23.99",
+      "period": "/mo",
+      "originalPrice": "$34.99",
+      "tags": ["FOR SCALABILITY AND AUTOMATION"],
+      "learnMoreUrl": "https://www.godaddy.com/websites/website-builder",
+      "icon": "globe",
+      "visual": "https://img1.wsimg.com/cdn/Image/All/All/1/All/3650f391-adb0-4258-a855-d79e50927976/feature-category-websites2x.jpg",
+      "savings": "Save 31%",
+      "features": [
+        "Lower-tier features, plus:",
+        "Sell an unlimited number of products and services",
+        "Set up multiple payment and delivery options",
+        "Create your own discounts and promotions",
+        "Create and send email marketing campaigns to 100,000 users per month",
+        "Sales tax is automatically calculated for you",
+        "List your products on third-party marketplaces",
+        "Inventory automatically synced across all platforms"
+      ]
+    },
+    {
+      "id": "wordpress-hosting-basic",
+      "category": "website",
+      "type": "wordpress-hosting",
+      "name": "Hosting for WordPress Basic",
+      "description": "Best for hosting simple websites",
+      "price": "$6.99",
+      "period": "/mo",
+      "originalPrice": "$179.88",
+      "tags": ["53% SAVINGS"],
+      "learnMoreUrl": "https://www.godaddy.com/hosting/wordpress-hosting",
+      "icon": "globe",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/e357c95b-e99b-4e5a-b34b-91ab9ecc2016/MRQD",
+      "savings": "53% savings with an annual term",
+      "features": [
+        "1 website",
+        "10 GB NVMe storage"
+      ]
+    },
+    {
+      "id": "wordpress-hosting-deluxe",
+      "category": "website",
+      "type": "wordpress-hosting",
+      "name": "Hosting for WordPress Deluxe",
+      "description": "Ideal as you grow, with upgraded resources",
+      "price": "$10.99",
+      "period": "/mo",
+      "originalPrice": "$239.88",
+      "tags": ["RECOMMENDED", "45% SAVINGS"],
+      "learnMoreUrl": "https://www.godaddy.com/hosting/wordpress-hosting",
+      "icon": "globe",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/e357c95b-e99b-4e5a-b34b-91ab9ecc2016/MRQD",
+      "savings": "45% savings with an annual term",
+      "features": [
+        "1 website",
+        "20 GB NVMe storage",
+        "Staging site",
+        "Up to 2x faster performance with CDN",
+        "SEO Optimizer",
+        "TrustedSites gets you up to 30% more conversions"
+      ],
+      "badge": "RECOMMENDED"
+    },
+    {
+      "id": "wordpress-hosting-ultimate",
+      "category": "website",
+      "type": "wordpress-hosting",
+      "name": "Hosting for WordPress Ultimate",
+      "description": "Our best single-site plan. Plus, sell online",
+      "price": "$14.99",
+      "period": "/mo",
+      "originalPrice": "$323.88",
+      "tags": ["44% SAVINGS"],
+      "learnMoreUrl": "https://www.godaddy.com/hosting/wordpress-hosting",
+      "icon": "globe",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/e357c95b-e99b-4e5a-b34b-91ab9ecc2016/MRQD",
+      "savings": "44% savings with an annual term",
+      "features": [
+        "1 website",
+        "30 GB NVMe storage",
+        "Staging site",
+        "Up to 2x faster performance with CDN",
+        "SEO Optimizer",
+        "TrustedSites gets you up to 30% more conversions",
+        "Smart WordPress plugin manager",
+        "Sell online with WooCommerce",
+        "Priority Support",
+        "PHP version control",
+        "Object Cache Pro",
+        "Version controls for WP Core",
+        "Application Performance Monitoring (APM)",
+        "Git Integration"
+      ]
+    },
+    {
+      "id": "woocommerce-hosting-essentials",
+      "category": "website",
+      "type": "woocommerce-hosting",
+      "name": "WooCommerce Hosting Essentials",
+      "description": "Get all you need to launch your business online and start selling",
+      "price": "$29.99",
+      "period": "/mo",
+      "originalPrice": "$359.88",
+      "tags": ["SAVINGS"],
+      "learnMoreUrl": "https://www.godaddy.com/hosting/woocommerce-hosting",
+      "icon": "globe",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/8764c16d-27f3-41cb-9b7f-999004f9e7ae/multi_feat_managed_woocommerce_795x543_2x",
+      "savings": "Savings with a 1-yr term",
+      "features": [
+        "Sell physical or digital goods, memberships, and gift certificates",
+        "Unlimited products and online store orders",
+        "Sell on leading online marketplaces with up to 50 orders/mo",
+        "Offer buy online, pick up in-store",
+        "Abandoned cart emails: 1-part series",
+        "Discounted shipping rates: up to 84%",
+        "Online card transaction fee: 2.7% + 30¢"
+      ]
+    },
+    {
+      "id": "woocommerce-hosting-flex",
+      "category": "website",
+      "type": "woocommerce-hosting",
+      "name": "WooCommerce Hosting Flex",
+      "description": "Most flexible way to grow your business",
+      "price": "$79.99",
+      "period": "/mo",
+      "originalPrice": "$959.88",
+      "tags": ["FLEXIBLE"],
+      "learnMoreUrl": "https://www.godaddy.com/hosting/woocommerce-hosting",
+      "icon": "globe",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/8764c16d-27f3-41cb-9b7f-999004f9e7ae/multi_feat_managed_woocommerce_795x543_2x",
+      "savings": "With a 1-yr term",
+      "features": [
+        "Sell physical or digital goods, memberships, and gift certificates",
+        "Unlimited products and online store orders",
+        "Sell on leading online marketplaces with up to 50 orders/mo",
+        "Offer buy online, pick up in-store",
+        "Abandoned cart emails: 2-part series",
+        "Discounted shipping rates: up to 84%",
+        "Online card transaction fee: 2.7% + 30¢"
+      ]
+    },
+    {
+      "id": "woocommerce-hosting-expand",
+      "category": "website",
+      "type": "woocommerce-hosting",
+      "name": "WooCommerce Hosting Expand",
+      "description": "Sell more across marketplaces and social platforms",
+      "price": "$129.99",
+      "period": "/mo",
+      "originalPrice": "$1,559.88",
+      "tags": ["EXPAND"],
+      "learnMoreUrl": "https://www.godaddy.com/hosting/woocommerce-hosting",
+      "icon": "globe",
+      "visual": "https://img1.wsimg.com/cdnassets/transform/8764c16d-27f3-41cb-9b7f-999004f9e7ae/multi_feat_managed_woocommerce_795x543_2x",
+      "savings": "With a 1-yr term",
+      "features": [
+        "Sell physical + digital + service products + memberships, and gift certificates",
+        "Unlimited products and online store orders",
+        "Sell on leading online marketplaces with up to 5,000 orders/mo",
+        "Offer buy online, pick up in-store",
+        "Abandoned cart emails: 3-part series",
+        "Discounted shipping rates: up to 84%",
+        "Online card transaction fee: 2.7% + 30¢"
+      ]
+    },
+    {
+      "id": "email-essentials",
+      "category": "email",
+      "name": "Microsoft 365 Email Essentials",
+      "description": "Best for building trust — with an email address that matches your domain. Plus, get 10 GB email storage, world-class data security, and spam filtering.",
+      "price": "$1.99",
+      "period": "/user/mo",
+      "originalPrice": "$7.99",
+      "tags": ["EMAIL MATCHES DOMAIN"],
+      "learnMoreUrl": "https://www.godaddy.com/email",
+      "icon": "mail",
+      "visual": "https://img1.wsimg.com/cdn/Image/All/All/1/All/af30fba5-406f-4f61-9969-4a076b6b062c/feature-category-email2x.jpg",
+      "features": [
+        "10 GB email storage",
+        "Professional email with your domain",
+        "World-class data security and spam filtering"
+      ],
+      "storage": "10 GB",
+      "savings": "Save 75%"
+    },
+    {
+      "id": "email-plus",
+      "category": "email",
+      "name": "Microsoft 365 Email Plus with Security",
+      "description": "Best for scaling businesses. Get Email Essentials with 50 GB email storage for your growing customer list and marketing to them.",
+      "price": "$5.99",
+      "period": "/user/mo",
+      "originalPrice": "$9.99",
+      "tags": ["ADDITIONAL STORAGE"],
+      "learnMoreUrl": "https://www.godaddy.com/email",
+      "icon": "mail",
+      "visual": "https://img1.wsimg.com/cdn/Image/All/All/1/All/af30fba5-406f-4f61-9969-4a076b6b062c/feature-category-email2x.jpg",
+      "features": [
+        "50 GB email storage",
+        "Advanced security features",
+        "Professional email with your domain"
+      ],
+      "storage": "50 GB",
+      "savings": "Save 40%"
+    },
+    {
+      "id": "email-professional",
+      "category": "email",
+      "name": "Microsoft 365 Secure Business Professional",
+      "description": "Best for maximizing productivity. Get Email Plus and Microsoft 365 apps like Word, Excel, PowerPoint, and Teams. Includes 1 TB secure OneDrive storage for your growth.",
+      "price": "$11.99",
+      "period": "/user/mo",
+      "originalPrice": "$26.99",
+      "tags": [ "M365 OFFICE APPS"],
+      "learnMoreUrl": "https://www.godaddy.com/email",
+      "icon": "mail",
+      "visual": "https://img1.wsimg.com/cdn/Image/All/All/1/All/af30fba5-406f-4f61-9969-4a076b6b062c/feature-category-email2x.jpg",
+      "savings": "55% savings with an annual term"
+    }
+  ],
+  "categories": [
+    {
+      "id": "ssl-security",
+      "name": "SSL & Security",
+      "description": "Secure your website with SSL certificates and comprehensive security",
+      "icon": "shield",
+      "subcategories": [
+        {
+          "id": "ssl",
+          "name": "SSL Certificates",
+          "filterType": "category",
+          "filterValue": "ssl-security",
+          "additionalFilter": "id",
+          "additionalValue": "ssl"
+        },
+        {
+          "id": "managed-ssl",
+          "name": "Managed SSL",
+          "filterType": "category",
+          "filterValue": "ssl-security",
+          "additionalFilter": "id",
+          "additionalValue": "managed"
+        },
+        {
+          "id": "web-security",
+          "name": "Web Security",
+          "filterType": "category",
+          "filterValue": "ssl-security",
+          "additionalFilter": "id",
+          "additionalValue": "security"
+        }
+      ]
+    },
+    {
+      "id": "website",
+      "name": "Websites",
+      "description": "Build and host your online presence",
+      "icon": "globe",
+      "subcategories": [
+        {
+          "id": "website-builder",
+          "name": "Website Builder",
+          "filterType": "type",
+          "filterValue": "website-builder"
+        },
+        {
+          "id": "wordpress-hosting",
+          "name": "Managed Hosting for WordPress",
+          "filterType": "type",
+          "filterValue": "wordpress-hosting"
+        },
+        {
+          "id": "woocommerce-hosting",
+          "name": "Managed Hosting for WooCommerce",
+          "filterType": "type",
+          "filterValue": "woocommerce-hosting"
+        }
+      ]
+    },
+    {
+      "id": "email",
+      "name": "Email",
+      "description": "Professional email with your domain",
+      "icon": "mail"
+    }
+  ]
+}
