@@ -152,9 +152,21 @@ BASE_URL=https://your-server.com
 
 This will be used to generate the HTML for the widgets so that they can serve static assets from this hosted url.
 
-## Contributing
+## References
 
-You are welcome to open issues or submit PRs to improve this app, however, please note that we may not review all suggestions.
+**ChatGPT Developer Docs:**
+- [OpenAI Apps SDK Documentation](https://developers.openai.com/apps-sdk)
+- [Apps SDK Build Examples](https://developers.openai.com/apps-sdk/build/examples)
+- [Introducing Apps in ChatGPT](https://openai.com/index/introducing-apps-in-chatgpt/)
+
+**Development Tools:**
+- [Ngrok Setup Guide](https://dashboard.ngrok.com/get-started/setup/macos)
+
+**API References:**
+- GoDaddy Domain Find API
+- AiroHQ serp-agent for UX inspiration
+- Booking.com ChatGPT app for UX inspiration
+
 
 ## License
 
