@@ -7,8 +7,8 @@ This repository showcases a GoDaddy domain search application built with the App
 The app demonstrates domain search tools with interactive widgets for domain availability checking, domain recommendations, and product suggestions.
 
 <div style="display: flex; justify-content: space-around; gap: 10px; align-items: flex-start;">
-  <img src="./images/problem_statement_1.png" alt="Problem-Statement" style="max-width: 48%; height: auto;">
-  <img src="./images/problem_statement_2.png" alt="Problem-Statement-2" style="max-width: 48%; height: auto;">
+  <img src="./images/carousel_view.png" alt="carousel" style="max-width: 55%; height: auto;">
+  <img src="./images/mobile_view.png" alt="mobile" style="max-width: 40%; height: auto;">
 </div>
 
 ## MCP + Apps SDK overview
