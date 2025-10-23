@@ -2,17 +2,14 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-This repository showcases a GoDaddy domain search application built with the Apps SDK and MCP (Model Context Protocol). It provides domain search functionality with rich UI components that can be used within ChatGPT conversations.
+This repository showcases a GoDaddy domain search application built with the Apps SDK and MCP (Model Context Protocol). It provides domain search functionality with rich UI components that can be used within ChatGPT conversations. Here is the [problem statement](./ProblemStatement.md)
 
 The app demonstrates domain search tools with interactive widgets for domain availability checking, domain recommendations, and product suggestions.
 
-List view
-
-![Domain Search list view screenshot](./images/list.png)
-
-Carousel View
-
-![Domain Search App Screenshot](./images/carousel.png) 
+<div style="display: flex; justify-content: space-around; gap: 10px; align-items: flex-start;">
+  <img src="./images/problem_statement_1.png" alt="Problem-Statement" style="max-width: 48%; height: auto;">
+  <img src="./images/problem_statement_2.png" alt="Problem-Statement-2" style="max-width: 48%; height: auto;">
+</div>
 
 ## MCP + Apps SDK overview
 
@@ -122,9 +119,10 @@ For example: `https://<custom_endpoint>.ngrok-free.app/mcp`
 
 Once you add a connector verify tools and you are ready to use it in ChatGPT conversations.
 
-![Settings1](./images/app_setting.png)
-
-![Settings2](./images/app_setting0.png)
+<div style="display: flex; justify-content: space-around; gap: 10px; align-items: flex-start;">
+  <img src="./images/app_setting.png" alt="Settings1" style="max-width: 48%; height: auto;">
+  <img src="./images/app_setting0.png" alt="Settings2" style="max-width: 48%; height: auto;">
+</div>
 
 You can add your app to the conversation context by selecting it in the "More" options.
 
