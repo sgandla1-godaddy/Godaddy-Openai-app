@@ -87,7 +87,7 @@ function widgetMeta(widget: DomainWidget) {
 
 const widgets: DomainWidget[] = [
   {
-    id: "search-domains",
+    id: "generic-search-domains",
     title: "Search Domain Names",
     templateUri: "ui://widget/domain-carousel.html",
     invoking: "Searching for available domain names",
@@ -96,18 +96,30 @@ const widgets: DomainWidget[] = [
     responseText: "Here are some great domain options for your business!",
   },
   {
-    id: "search-domains-fullscreen",
+    id: "cheap-search-domains",
+    title: "Search Cheap Domain Names",
+    templateUri: "ui://widget/domain-carousel.html",
+    invoking: "Searching for domain names when prompt specifically requests cheap available domainnames",
+    invoked: "Found cheap domain options for your business idea when prompt specifically requests cheap available domainnames",
+    html: readWidgetHtml("domains-carousel"),
+    responseText: "Here are some cheap domain options for your business!",
+  },
+  {
+    id: "generic-search-domains-fullscreen",
     title: "Search Domain Names (List View)",
     templateUri: "ui://widget/domains-list-fullscreen.html",
     invoking: "Searching for available domain names",
     invoked: "Found domain options for your business idea",
     html: readWidgetHtml("domains-list-fullscreen"),
     responseText: "Here are available domains in a detailed list view. You can expand to see all results and cross-sell options!",
-  }
+  },
 ];
 
 const widgetsById = new Map<string, DomainWidget>();
 const widgetsByUri = new Map<string, DomainWidget>();
+// Add this after the existing maps (around line 106)
+const sessionContext = new Map<string, any>();
+
 
 widgets.forEach((widget) => {
   widgetsById.set(widget.id, widget);
@@ -119,15 +131,31 @@ const toolInputSchema = {
   properties: {
     keywords: {
       type: "string",
-      description: "Business idea, keywords, or domain concept to search for (e.g., 'pet treats', 'bakery', 'my coffee shop', 'tech startup')",
+      description: "The user's original request or query about domains (preserve the exact wording to analyze context)",
     },
+    domainName: {
+      type: "string",
+      description: "Specific domain to check, e.g., mybrand.com. Optional - if not provided, will search for available domains",
+    },
+    businessType: {
+      type: "string",
+      description: "Type of business (e.g., 'restaurant', 'e-commerce', 'blog', 'portfolio')",
+    },
+    targetAudience: {
+      type: "string",
+      description: "Target audience or market (e.g., 'local customers', 'global', 'B2B', 'B2C')",
+    },
+    budget: {
+      type: "string",
+      description: "Budget range for domain (e.g., 'under $50', 'premium', 'any')",
+    }
   },
-  required: ["keywords"],
+  required: ["keywords"], // Make only keywords required
   additionalProperties: false,
 } as const;
 
 const toolInputParser = z.object({
-  keywords: z.string(),
+  keywords: z.string()
 });
 
 /**
@@ -135,9 +163,6 @@ const toolInputParser = z.object({
  */
 async function loadCustomDomains(keywords: string) {
   try {
-    console.log(`[DomainSearch] Searching for domains with keywords: "${keywords}"`);
-    
-    // Call GoDaddy API
     const response = await fetch(
       `https://entourage.prod.aws.godaddy.com/v1/search/spins?q=${encodeURIComponent(keywords)}&pagesize=5`,
       {
@@ -160,7 +185,7 @@ async function loadCustomDomains(keywords: string) {
     const domains = data.RecommendedDomains?.map((domain: any, index: number) => {
       // Find corresponding product info for pricing
       const product = data.Products?.find((p: any) => p.Tld === domain.Extension);
-      
+
       return {
         id: (index + 1).toString(),
         name: domain.Fqdn,
@@ -195,7 +220,7 @@ async function loadCustomDomains(keywords: string) {
     };
   } catch (error) {
     console.error('[DomainSearch] Error calling GoDaddy API:', error);
-    
+
     // Fallback to mock data if API fails
     return {
       domains: [
@@ -224,6 +249,31 @@ async function loadCustomDomains(keywords: string) {
   }
 }
 
+async function loadCheapCustomDomains(keywords: string) {
+  try {
+    const response = await loadCustomDomains(keywords);
+    // sort the domains to get the cheap ones
+    const cheapDomains = [...response.domains].sort((a: any, b: any) => {
+      const priceA = parseFloat(a.price.replace('$', ''));
+      const priceB = parseFloat(b.price.replace('$', ''));
+      return priceA - priceB;
+    });
+    return {
+      domains: cheapDomains,
+      searchKeywords: keywords,
+      totalResults: cheapDomains.length,
+    };
+  } catch (error) {
+    console.error('[CheapDomainSearch] Error:', error);
+    return {
+      domains: [],
+      searchKeywords: keywords,
+      totalResults: 0,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+}
+
 /**
  * Generate a simple SVG image for domain TLD
  */
@@ -239,15 +289,15 @@ function generateDomainImage(tld: string): string {
     'life': '#16a34a',
     'online': '#9333ea',
   };
-  
+
   const color = colors[tld] || '#6b7280';
-  
+
   return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='140'%3E%3Crect fill='${encodeURIComponent(color)}' width='280' height='140'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, sans-serif' font-size='28' font-weight='600' fill='white'%3E.${tld}%3C/text%3E%3C/svg%3E`;
 }
 
 const tools: Tool[] = widgets.map((widget) => ({
   name: widget.id,
-  description: widget.title,
+  description: "Search for domain names based on user's business idea or request. Pass the user's exact words in the 'keywords' parameter to preserve context.",
   inputSchema: toolInputSchema,
   title: widget.title,
   _meta: widgetMeta(widget),
@@ -255,7 +305,7 @@ const tools: Tool[] = widgets.map((widget) => ({
     destructiveHint: false,
     openWorldHint: false,
     readOnlyHint: true,
-  },
+  }
 }));
 
 const resources: Resource[] = widgets.map((widget) => ({
@@ -334,16 +384,19 @@ function createDomainsServer(): Server {
   server.setRequestHandler(
     CallToolRequestSchema,
     async (request: CallToolRequest) => {
+      console.log('request.params', request.params);
       const widget = widgetsById.get(request.params.name);
-
       if (!widget) {
         throw new Error(`Unknown tool: ${request.params.name}`);
       }
-
       const args = toolInputParser.parse(request.params.arguments ?? {});
 
-      // Load custom domain search results
-      const domainResults = await loadCustomDomains(args.keywords);
+      let domainResults;
+      if (widget.id === "cheap-search-domains") {
+        domainResults = await loadCheapCustomDomains(args.keywords);
+      } else {
+        domainResults = await loadCustomDomains(args.keywords);
+      }
 
       return {
         content: [
@@ -494,4 +547,3 @@ if (process.argv.includes("--stdio") || process.stdin.isTTY === false) {
     );
   });
 }
-

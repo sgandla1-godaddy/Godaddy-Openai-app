@@ -18,7 +18,7 @@ function App() {
   const searchKeywords = toolOutput?.searchKeywords;
   const totalResults = toolOutput?.totalResults;
   const [isLoading, setIsLoading] = React.useState(true);
-  
+
   // Get current theme from ChatGPT
   const theme = useTheme();
   const isDark = theme === "dark";
@@ -42,22 +42,22 @@ function App() {
   // Track carousel state for telemetry
   React.useEffect(() => {
     if (!emblaApi) return;
-    
+
     const updateButtons = () => {
       setCanPrev(emblaApi.canScrollPrev());
       setCanNext(emblaApi.canScrollNext());
     };
-    
+
     updateButtons();
     emblaApi.on("select", updateButtons);
     emblaApi.on("reInit", updateButtons);
-    
+
     // Telemetry
     console.log('[DomainCarousel] Initialized with', domains.length, 'domains');
     if (searchKeywords) {
       console.log('[DomainCarousel] Search keywords:', searchKeywords);
     }
-    
+
     return () => {
       emblaApi.off("select", updateButtons);
       emblaApi.off("reInit", updateButtons);
@@ -67,7 +67,7 @@ function App() {
   const handleShowMore = () => {
     // Track telemetry
     console.log('[DomainCarousel] Show more clicked');
-    
+
     // TODO: Trigger tool call to load more domains
     // window.openai.callTool('load_more_domains', { skip: domains.length });
   };
@@ -87,27 +87,24 @@ function App() {
   };
 
   return (
-    <div 
-      className={`antialiased relative w-full py-5 ${
-        isDark 
-          ? 'bg-transparent text-white' 
+    <div
+      className={`antialiased relative w-full py-5 ${isDark
+          ? 'bg-transparent text-white'
           : 'bg-transparent text-gray-900'
-      }`}
+        }`}
       role="region"
       aria-label="Available domain names carousel"
     >
       {/* Search Context Header */}
       {!isLoading && searchKeywords && (
         <div className="mb-4">
-          <h2 className={`text-lg font-semibold ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}>
+          <h2 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'
+            }`}>
             Domain options for "{searchKeywords}"
           </h2>
           {totalResults && (
-            <p className={`text-sm mt-1 ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            }`}>
+            <p className={`text-sm mt-1 ${isDark ? 'text-gray-300' : 'text-gray-600'
+              }`}>
               Found {totalResults} available domain{totalResults !== 1 ? 's' : ''}
             </p>
           )}
@@ -143,11 +140,10 @@ function App() {
         }
       >
         <div
-          className={`h-full w-full ${
-            isDark 
+          className={`h-full w-full ${isDark
               ? 'bg-gradient-to-r from-[#212121] to-transparent'
               : 'bg-gradient-to-r from-white to-transparent'
-          }`}
+            }`}
           style={{
             WebkitMaskImage:
               "linear-gradient(to bottom, transparent 0%, white 30%, white 70%, transparent 100%)",
@@ -164,11 +160,10 @@ function App() {
         }
       >
         <div
-          className={`h-full w-full ${
-            isDark
+          className={`h-full w-full ${isDark
               ? 'bg-gradient-to-l from-[#212121] to-transparent'
               : 'bg-gradient-to-l from-white to-transparent'
-          }`}
+            }`}
           style={{
             WebkitMaskImage:
               "linear-gradient(to bottom, transparent 0%, white 30%, white 70%, transparent 100%)",
@@ -182,11 +177,10 @@ function App() {
       {!isLoading && canPrev && (
         <button
           aria-label="View previous domains"
-          className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full ring-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer ${
-            isDark
+          className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full ring-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer ${isDark
               ? 'bg-[#252935] text-white ring-white/10 hover:bg-[#2d3142] active:bg-[#2d3142] focus:ring-blue-500 shadow-lg'
               : 'bg-white text-gray-500 ring-black/5 hover:text-gray-900 active:bg-gray-50 focus:ring-gray-600'
-          }`}
+            }`}
           onClick={handlePrevious}
           type="button"
         >
@@ -200,11 +194,10 @@ function App() {
       {!isLoading && canNext && (
         <button
           aria-label="View next domains"
-          className={`absolute right-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full ring-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer ${
-            isDark
+          className={`absolute right-2 top-1/2 -translate-y-1/2 z-10 inline-flex items-center justify-center h-8 w-8 rounded-full ring-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer ${isDark
               ? 'bg-[#252935] text-white ring-white/10 hover:bg-[#2d3142] active:bg-[#2d3142] focus:ring-blue-500 shadow-lg'
               : 'bg-white text-gray-500 ring-black/5 hover:text-gray-900 active:bg-gray-50 focus:ring-gray-600'
-          }`}
+            }`}
           onClick={handleNext}
           type="button"
         >
@@ -227,4 +220,3 @@ if (rootElement) {
 } else {
   console.error('[DomainCarousel] Root element "domains-carousel-root" not found');
 }
-

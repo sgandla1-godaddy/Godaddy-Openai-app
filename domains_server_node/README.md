@@ -31,7 +31,7 @@ Each tool responds with:
 
 ## Available Tools
 
-- `search-domains`: Search for available domain names based on keywords
+- `generic-search-domains`: Search for available domain names based on keywords
 - `show-domain-carousel`: Display a carousel of recommended domains
 
 Feel free to extend the handlers with real GoDaddy API integration, authentication, and persistence.
