@@ -99,8 +99,8 @@ const widgets: DomainWidget[] = [
     id: "cheap-search-domains",
     title: "Search Cheap Domain Names",
     templateUri: "ui://widget/domain-list-fullscreen.html",
-    invoking: "Searching for domain names when prompt specifically requests cheap available domainnames",
-    invoked: "Found cheap domain options for your business idea when prompt specifically requests cheap available domainnames",
+    invoking: "Searching for domain names",
+    invoked: "Found cheap domain options for your business idea",
     html: readWidgetHtml("domains-list-fullscreen"),
     responseText: "Here are some cheap domain options for your business!",
   },
@@ -165,7 +165,7 @@ const toolInputSchema = {
     },
     budget: {
       type: "string",
-      description: "Budget range for domain (e.g., 'under $50', 'premium', 'any')",
+      description: "Budget range for domain (e.g., 'under $10', 'premium', 'any')",
     },
     category: {
       type: "string",
@@ -187,7 +187,7 @@ const toolInputParser = z.object({
 async function loadProductRecommendations(category: string = "email") {
   try {
     console.log(`[ProductRecommend] Loading recommendations for category: "${category}"`);
-    
+
     // For now, we'll use mock data based on category
     // In a real implementation, this would call a product API
     const mockProducts = {
@@ -348,7 +348,7 @@ async function loadProductRecommendations(category: string = "email") {
     };
 
     const products = mockProducts[category as keyof typeof mockProducts] || mockProducts.email;
-    
+
     console.log(`[ProductRecommend] Loaded ${products.length} products for category: ${category}`);
 
     return {
@@ -358,7 +358,7 @@ async function loadProductRecommendations(category: string = "email") {
     };
   } catch (error) {
     console.error('[ProductRecommend] Error loading product recommendations:', error);
-    
+
     // Fallback to email products if error
     return {
       products: [],
