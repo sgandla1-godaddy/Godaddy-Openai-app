@@ -19,6 +19,26 @@ export default function DomainListCard({ domain, showImage = false }) {
 
   const { base, tld } = getDomainParts(domain.name);
 
+  const buildAddToCartUrl = (domainName, tld) => {
+    // Create the request data object
+    const requestData = {
+      packages: [
+        {
+          pkgid: "domain",
+          term: "12:Month",
+          tld: tld,
+          domain: {
+            name: domainName
+          }
+        }
+      ],
+      itc: "test-itc"
+    };
+  
+    const encodedRequestData = encodeURIComponent(JSON.stringify(requestData));
+    return `https://salesproducts.api.godaddy.com/v1/pl/1/cart/packages?requestData=${encodedRequestData}&redirectToCart=true&allowPartialSuccess=false&skipAvailCheck=false`;
+  }
+
   const handleSelect = () => {
     console.log('[DomainListCard] View clicked:', domain.name);
     const godaddyUrl = `https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(domain.name)}`;
@@ -28,6 +48,8 @@ export default function DomainListCard({ domain, showImage = false }) {
   const handleAddToCart = () => {
     console.log('[DomainListCard] Add to cart clicked:', domain.name);
     // TODO: Implement cart functionality
+    const godaddyUrl = buildAddToCartUrl(domain.name, domain.tld);
+    window.open(godaddyUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
