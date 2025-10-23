@@ -6,10 +6,12 @@ This repository showcases a GoDaddy domain search application built with the App
 
 The app demonstrates domain search tools with interactive widgets for domain availability checking, domain recommendations, and product suggestions.
 
-<div style="display: flex; justify-content: space-around; gap: 10px; align-items: flex-start;">
-  <img src="./images/carousel_view.png" alt="carousel" style="max-width: 55%; height: auto;">
-  <img src="./images/mobile_view.png" alt="mobile" style="max-width: 40%; height: auto;">
-</div>
+<table>
+  <tr style="border: none;">
+    <td style="border: none;"><img src="./images/carousel_view.png" alt="carousel"></td>
+    <td style="border: none;"><img src="./images/mobile_view.png" alt="mobile"></td>
+  </tr>
+</table>
 
 ## MCP + Apps SDK overview
 
@@ -119,10 +121,12 @@ For example: `https://<custom_endpoint>.ngrok-free.app/mcp`
 
 Once you add a connector verify tools and you are ready to use it in ChatGPT conversations.
 
-<div style="display: flex; justify-content: space-around; gap: 10px; align-items: flex-start;">
-  <img src="./images/app_setting.png" alt="Settings1" style="max-width: 48%; height: auto;">
-  <img src="./images/app_setting0.png" alt="Settings2" style="max-width: 48%; height: auto;">
-</div>
+<table>
+  <tr style="border: none;">
+    <td style="border: none;"><img src="./images/app_setting.png" alt="Settings1"></td>
+    <td style="border: none;"><img src="./images/app_setting0.png" alt="Settings2"></td>
+  </tr>
+</table>
 
 You can add your app to the conversation context by selecting it in the "More" options.
 
