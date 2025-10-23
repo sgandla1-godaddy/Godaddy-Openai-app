@@ -1,9 +1,18 @@
-# Apps SDK Examples Gallery
+# GoDaddy Domain Search App
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-This repository showcases example UI components to be used with the Apps SDK, as well as example MCP servers that expose a collection of components as tools.
-It is meant to be used as a starting point and source of inspiration to build your own apps for ChatGPT.
+This repository showcases a GoDaddy domain search application built with the Apps SDK and MCP (Model Context Protocol). It provides domain search functionality with rich UI components that can be used within ChatGPT conversations.
+
+The app demonstrates domain search tools with interactive widgets for domain availability checking, domain recommendations, and product suggestions.
+
+List view
+
+![Domain Search list view screenshot](./images/list.png)
+
+Carousel View
+
+![Domain Search App Screenshot](./images/carousel.png) 
 
 ## MCP + Apps SDK overview
 
@@ -21,18 +30,24 @@ The MCP servers in this demo highlight how each tool can light up widgets by com
 
 ## Repository structure
 
-- `src/` – Source for each widget example.
+- `src/` – Source for domain search widget components and utilities.
 - `assets/` – Generated HTML, JS, and CSS bundles after running the build step.
-- `pizzaz_server_node/` – MCP server implemented with the official TypeScript SDK.
-- `pizzaz_server_python/` – Python MCP server that returns the Pizzaz widgets.
-- `solar-system_server_python/` – Python MCP server for the 3D solar system widget.
+- `domains_server_node/` – MCP server implemented with the official TypeScript SDK for domain search functionality.
 - `build-all.mts` – Vite build orchestrator that produces hashed bundles for every widget entrypoint.
+
+### Domain Components
+
+- `domain-available/` – Widget for displaying available domains
+- `domain-unavailable/` – Widget for displaying unavailable domains  
+- `domains-carousel/` – Carousel widget for browsing domains
+- `domains-list-fullscreen/` – Fullscreen domain list view
+- `products-list/` – Widget for displaying product recommendations
+- `products-recommend/` – Widget for product suggestions
 
 ## Prerequisites
 
 - Node.js 18+
 - pnpm (recommended) or npm/yarn
-- Python 3.10+ (for the Python MCP server)
 
 ## Install dependencies
 
@@ -70,41 +85,24 @@ pnpm run serve
 
 The assets are exposed at [`http://localhost:4444`](http://localhost:4444) with CORS enabled so that local tooling (including MCP inspectors) can fetch them.
 
-## Run the MCP servers
+## Run the MCP server
 
-The repository ships several demo MCP servers that highlight different widget bundles:
-
-- **Pizzaz (Node & Python)** – pizza-inspired collection of tools and components
-- **Solar system (Python)** – 3D solar system viewer
+The repository includes a domain search MCP server that provides domain search functionality with rich UI components.
 
 Every tool response includes plain text content, structured JSON, and `_meta.openai/outputTemplate` metadata so the Apps SDK can hydrate the matching widget.
 
-### Pizzaz Node server
+### Domain Search Server
 
 ```bash
-cd pizzaz_server_node
+cd domains_server_node
 pnpm start
 ```
 
-### Pizzaz Python server
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r pizzaz_server_python/requirements.txt
-uvicorn pizzaz_server_python.main:app --port 8000
-```
-
-### Solar system Python server
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r solar-system_server_python/requirements.txt
-uvicorn solar-system_server_python.main:app --port 8000
-```
-
-You can reuse the same virtual environment for all Python servers—install the dependencies once and run whichever entry point you need.
+This server provides tools for:
+- Domain availability checking
+- Domain recommendations
+- Product suggestions
+- Domain search with various filters
 
 ## Testing in ChatGPT
 
@@ -122,18 +120,23 @@ You will get a public URL that you can use to add your local server to ChatGPT i
 
 For example: `https://<custom_endpoint>.ngrok-free.app/mcp`
 
-Once you add a connector, you can use it in ChatGPT conversations.
+Once you add a connector verify tools and you are ready to use it in ChatGPT conversations.
+
+![Settings1](./images/app_setting.png)
+
+![Settings2](./images/app_setting0.png)
 
 You can add your app to the conversation context by selecting it in the "More" options.
 
 ![more-chatgpt](https://github.com/user-attachments/assets/26852b36-7f9e-4f48-a515-aebd87173399)
 
-You can then invoke tools by asking something related. For example, for the Pizzaz app, you can ask "What are the best pizzas in town?".
+You can then invoke tools by asking something related. For example, for the domain search app, you can ask "Search for available domains for my business" or "Find domain recommendations for a tech startup".
 
 ## Next steps
 
-- Customize the widget data: edit the handlers in `pizzaz_server_node/src`, `pizzaz_server_python/main.py`, or the solar system server to fetch data from your systems.
-- Create your own components and add them to the gallery: drop new entries into `src/` and they will be picked up automatically by the build script.
+- Customize the widget data: edit the handlers in `domains_server_node/src` to fetch data from your domain search systems.
+- Create your own domain-related components: drop new entries into `src/` and they will be picked up automatically by the build script.
+- Integrate with real domain APIs: replace the mock data with actual domain availability checking services.
 
 ### Deploy your MCP server
 

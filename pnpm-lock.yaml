@@ -140,22 +140,6 @@ importers:
         specifier: ^5.6.3
         version: 5.9.2
 
-  pizzaz_server_node:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: ^0.5.0
-        version: 0.5.0
-      zod:
-        specifier: ^3.23.8
-        version: 3.25.76
-    devDependencies:
-      tsx:
-        specifier: ^4.19.2
-        version: 4.20.4
-      typescript:
-        specifier: ^5.6.3
-        version: 5.9.2
-
 packages:
 
   '@ampproject/remapping@2.3.0':
