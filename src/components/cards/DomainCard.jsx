@@ -28,7 +28,7 @@ export default function DomainCard({ domain, showImage = false, showAvailableBad
           term: "12:Month",
           tld: tld,
           domain: {
-            name: `${domainName}`
+            name: domainName
           }
         }
       ],
