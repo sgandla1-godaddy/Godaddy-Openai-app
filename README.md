@@ -13,6 +13,8 @@ The app demonstrates domain search tools with interactive widgets for domain ava
   </tr>
 </table>
 
+![Products Demo](./images/products.gif)
+
 ## MCP + Apps SDK overview
 
 The Model Context Protocol (MCP) is an open specification for connecting large language model clients to external tools, data, and user interfaces. An MCP server exposes tools that a model can call during a conversation and returns results according to the tool contracts. Those results can include extra metadata—such as inline HTML—that the Apps SDK uses to render rich UI components (widgets) alongside assistant messages.
